@@ -77,9 +77,7 @@
                     data-email={{$datas->email}} data-danhso={{$datas->danhso}} data-hoten="{{$datas->hoten}}"
                     data-toggle="modal" data-target="#editModal">Edit
                   </button>
-                  @can('user-delete')
                     <button class="btn btn-danger"  data-userid={{$datas->id}} data-toggle="modal" data-target="#deleteModal">Delete</button>
-                  @endcan
                 </td>
               </tr>
 
@@ -126,14 +124,12 @@
                           <input type="file" class="form-control" name="avatar" id="user_avatar" value="{{old('avatar')}}">
                         </div>
                         <div class="form-group">
-                          @can('role-edit')
                           <strong>Role: </strong>
                           <select id="roles" class="form-control" multiple name="roles[]">
                             @foreach($roles as $role)
                               <option value="{{$role}}">{{$role}}</option>
                             @endforeach
                           </select>  
-                          @endcan 
                         </div>
                         
 
