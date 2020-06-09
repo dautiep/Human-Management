@@ -27,7 +27,6 @@
    <th>No</th>
    <th>Name</th>
    <th>Guard_name</th>
-   
    <th width="280px">Action</th>
  </tr>
 

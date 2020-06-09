@@ -56,9 +56,8 @@
                     <input type="text" class="form-control" id="guard_name" placeholder="guard_name" name="guard_name" value="web" readonly>
                 </div>
                 <!-- /.card-body -->
-
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Create</button>
                 </div>
               </form>
             </div>
