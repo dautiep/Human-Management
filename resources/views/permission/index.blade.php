@@ -57,7 +57,7 @@
             <div class="modal-body">
             <div class="form-group">
                 <label>Tên Permission </label>
-                {!! Form::text('name', $p->name, array('placeholder' => 'Permission','class' => 'form-control', 'id' => 'permission_name')) !!}
+                {!! Form::text('name', null, array('placeholder' => 'Permission','class' => 'form-control', 'id' => 'permission_name')) !!}
             </div>
             <input type="hidden" name="id_permission" id="permission_id" value="">
             </div>
