@@ -1,61 +1,87 @@
-@extends('pages.layout.mainlayout')
-
-<link rel="stylesheet" href="../public/css/custom.css">
-
+@extends('layouts.layout_admin.admin')
 @section('content')
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-8">
-        <h1>USER DETAIL</h1>
-      </div>
-      <div class="col-sm-2">
-        <a class="btn btn-success" href="{{route('users.index')}}"> Back</a>
-      </div>
-      <div class="col-sm-2">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">users table</li>
-          <li class="breadcrumb-item active">user detail</li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
 
+    <!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper" style="margin-top: 50px;">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+		@include('layouts.errors')
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Thông tin chi tiết người dùng</h1>
+				</div>
+				<div class="col-sm-2">
+					<a class="btn btn-success" href="{{route('users.index')}}"> Back</a>
+				</div>
+				<div class="col-sm-4">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+						<li class="breadcrumb-item active">Detail User</li>
+					</ol>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+		</section>
 
-
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Tên tài khoản: </strong>
-            {{ $user->username }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email: </strong>
-            {{ $user->email }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Danh số: </strong>
-            {{ $user->danhso }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Họ Tên: </strong>
-            {{ $user->hoten }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Avatar: </strong>
-            <img src="{{$user->avatar}}" width="150px" class="img-circle">
-        </div>
-    </div>
-</div>
+		<!-- Main content -->
+		<section class="content">
+		<div class="row">
+			<div class="col-12">
+			<div class="card">
+				<!-- /.card-header -->
+				<div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Tên tài khoản: </label>
+                                <input type="text" class="form-control" id="inputEmail4" value="{{$user->username}}" readonly>
+							</div>
+							<div class="form-group col-md-6">
+                                <label for="inputPassword4">Email:</label>
+                                <input type="text" class="form-control" value="{{$user->email}}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+							<div class="form-group col-md-6">
+                                <label for="inputAddress">Họ tên: </label>
+                                <input type="text" class="form-control" id="inputAddress" value="{{$user->hoten}}" readonly>
+							</div>
+							<div class="form-group col-md-6">
+                                <label for="inputAddress">Giới tính: </label>
+								<input type="text" class="form-control" id="inputAddress" value="<?php 
+									echo $user->gioi_tinh = ($user->gioi_tinh==1)? 'Nam' : 'Nữ';
+								?>" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputAddress">Số điện thoại: </label>
+                                <input type="text" class="form-control" id="inputAddress" value="{{$user->so_dien_thoai}}" readonly>
+							</div>
+							<div class="form-group col-md-6">
+                                <label for="inputAddress">Danh số: </label>
+                                <input type="text" class="form-control" id="inputAddress" value="{{$user->danhso}}" readonly>
+                            </div>
+						</div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label >Hình ảnh:</label>
+                                <br>
+                                <img src="{{URL::asset('upload/avatar/'.$user->avatar)}}" width="150px">
+                            </div>
+                        </div>
+                    </form>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
 @endsection

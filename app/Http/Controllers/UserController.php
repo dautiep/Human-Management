@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\AddUserRequest;
 use DB;
 use Hash;
 
@@ -17,20 +18,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // function __construct()
-    // {
-    //      $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-    //      $this->middleware('permission:user-create', ['only' => ['create','store']]);
-    //      $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-    //      $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
 
     public function index(Request $request)
     {
         $roles = Role::pluck('name','name')->all();
-        $data = User::orderBy('id','ASC')->paginate(5); //lay ra 5 muc trong 1 trang
-        return view('users.index',compact('data', 'roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $users = User::orderBy('id','ASC')->paginate(5); //lay ra 5 muc trong 1 trang
+        return view('users.index',compact('users', 'roles'))
+            ->with('i');
     }
 
     /**
@@ -50,14 +51,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddUserRequest $request)
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required'
-        ]);
+        $validated = $request->validated();
 
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
         $input['password'] = Hash::make($input['password']); //ma hoa password
@@ -77,7 +73,7 @@ class UserController extends Controller
                 $random_file_name = str_random(4).'_'.$file_name; 
             }
             $file->move('upload/avatar',$random_file_name);
-            $input['avatar'] = 'upload/avatar/'.$random_file_name;
+            $input['avatar'] = $random_file_name;
         }
         else $input['avatar']='';
 
@@ -166,7 +162,7 @@ class UserController extends Controller
                 $random_file_name = str_random(4).'_'.$file_name; 
             }
             $file->move('upload/avatar',$random_file_name);
-            $input['avatar'] = 'upload/avatar/'.$random_file_name;
+            $input['avatar'] = $random_file_name;
         }
         
         else $input['avatar']= $user->avatar;

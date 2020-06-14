@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Duan;
 use Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth; //important
@@ -37,6 +38,7 @@ class HomeController extends Controller
             'username' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
+            'id_duan' => 'require'
             // 'roles' => 'required'
         ]);
 
@@ -62,13 +64,13 @@ class HomeController extends Controller
         }
         else $input['avatar']='';
 
-
         $user = User::create($input);
         return redirect()->route('login');
     }
 
     public function getViewUserRegister(){
-        return view('users.register');
+        $projects = Duan::all();
+        return view('users.register', ['projects' => $projects]);
     }
 
     public function userProFile(Request $request){

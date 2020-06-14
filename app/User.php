@@ -28,13 +28,16 @@ class User extends Authenticatable
         'hoten',
         'gioi_tinh',
         'so_dien_thoai', 
-        'avatar'
+        'avatar',
+        
     ];
 
     public function job()
     {
         return $this->hasMany('App\Job', 'id_user', 'id');
     }
+
+    
 
     /**
      * The attributes that should be hidden for arrays.

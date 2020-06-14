@@ -26,9 +26,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
            
 
-            //foreign key
-            $table->unsignedBigInteger('id_duan');
-            $table->foreign('id_duan')->references('id')->on('duan');
+            
 
             $table->timestamps();
         });
