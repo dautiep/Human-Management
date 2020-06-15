@@ -34,17 +34,17 @@
 					<div class="card-body">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Name:</strong>
-                                {{ $role->name }}
+                            	<strong>Tên role:</strong>
+                                <i>{{ $role->name }}</i>
                             </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Permissions:</strong>
+                            <strong>Quyền:</strong>
                             @if(!empty($rolePermissions))
                                 @foreach($rolePermissions as $v)
                                     <br>
-                                    <label class="label label-success">{{ $v->name }}</label>
+                                    <i>{{ $v->name }}</i>
                                 @endforeach
                             @endif
                         </div>
