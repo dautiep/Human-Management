@@ -59,11 +59,12 @@
                                 <button type="submit" class="btn-register">
                                     <span>{{ __('Đăng nhập') }}</span>
                                 </button>
+                                
                             </div>
                         </form>
                         <div class="social-login">
                             @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link" href="{{ route('password.request', 'csrf') }}">
                                         <span class="social-label">Quên mật khẩu</span>
                                     </a>
                             @endif
