@@ -75,7 +75,6 @@
                                         <input type="password" class="form-control" name="confirm-password" required autocomplete="new-password" placeholder="Nhập lại mật khẩu">
                                     </div>
                                 </div>
-                                <a style="text-decoration: none;" href="{{ route('login') }}" class="signin-image-link">You have an user account</a>
                             </div>
                             <div class="form-group">
                                 <div class="form-input">
