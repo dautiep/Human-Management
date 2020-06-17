@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -28,13 +29,16 @@ class User extends Authenticatable
         'hoten',
         'gioi_tinh',
         'so_dien_thoai', 
-        'avatar'
+        'avatar',
+        
     ];
 
     public function job()
     {
         return $this->hasMany('App\Job', 'id_user', 'id');
     }
+
+    
 
     /**
      * The attributes that should be hidden for arrays.
@@ -53,4 +57,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPasswordNotification($token));
+    }
 }

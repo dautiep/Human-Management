@@ -1,35 +1,62 @@
-@extends('layouts.app')
-
-
+@extends('layouts.layout_admin.admin')
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2> Show Role</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
+    <!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Thông tin chi tiết role</h1>
+					</div>
+					<div class="col-sm-2">
+						<a class="btn btn-success" href="{{route('roles.index')}}"> Back</a>
+					</div>
+					<div class="col-sm-4">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item active">Database</li>
+                            <li class="breadcrumb-item active">Show</li>
+							<li class="breadcrumb-item ">{{$role->id}}</li>
+						</ol>
+					</div>
+				</div>
+			</div><!-- /.container-fluid -->
+		</section>
 
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {{ $role->name }}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permissions:</strong>
-            @if(!empty($rolePermissions))
-                @foreach($rolePermissions as $v)
-                    <label class="label label-success">{{ $v->name }},</label>
-                @endforeach
-            @endif
-        </div>
-    </div>
-</div>
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card-header">
+						@include('layouts.errors')
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                            	<strong>Tên role:</strong>
+                                <i>{{ $role->name }}</i>
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Quyền:</strong>
+                            @if(!empty($rolePermissions))
+                                @foreach($rolePermissions as $v)
+                                    <br>
+                                    <i>{{ $v->name }}</i>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
 @endsection

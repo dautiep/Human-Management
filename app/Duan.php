@@ -20,4 +20,9 @@ class Duan extends Model
     {
         return $this->hasMany('App\Job', 'id_duan', 'id');
     }
+
+    public function user()
+    {
+        return $this->hasMany('App\User', 'id_duan', 'id');
+    }
 }

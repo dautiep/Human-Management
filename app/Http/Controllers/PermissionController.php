@@ -8,11 +8,19 @@ use DB;
 
 class PermissionController extends Controller
 {
+    // function __construct()
+    // {
+    //      $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+    //      $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
+    //      $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+    // }
+
     public function index(Request $request)
     {
-        $permissions = M_Permission::orderBy('id','ASC')->paginate(10);    
+        $permissions = M_Permission::all();    
         return view('permission.index', compact('permissions'))
-            ->with('i', ($request->input('page', 1) - 1) * 10);; 
+            ->with('i'); 
     }
     public function create()
     {

@@ -31,22 +31,14 @@
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Tên tài khoản "/>
 
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                               
                             </div>
 
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mật khẩu">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    
                                 </div>                                                                                              
                             </div>
 
@@ -59,7 +51,18 @@
                                 <button type="submit" class="btn-register">
                                     <span>{{ __('Đăng nhập') }}</span>
                                 </button>
-                                
+                                <div style="color: red;">
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </form>
                         <div class="social-login">
@@ -80,7 +83,7 @@
     <script src="public/colorlib-regform-7/js/main.js"></script>
 </body>
 </html>
-<!-- <div class="container">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -148,6 +151,6 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
