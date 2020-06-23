@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
+    Route::post('crop_avatar', 'UserController@uploadImage')->name('croppie');
 });
 
 Route::post('/register', 'HomeController@userRegister')->name('user-register');

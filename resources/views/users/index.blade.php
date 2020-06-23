@@ -192,7 +192,7 @@
 			<p class="text-center">
 				Bạn có chắc chắn muốn xóa tài khoản này không? 
 			</p>
-				<input type="hidden" name="id_user" id="user_id" value="">
+				<input type="hidden" name="id_user" id="use_id" value="">
 
 			</div>
 			<div class="modal-footer">
@@ -204,4 +204,51 @@
 		</div>
 	</div>
 	<!-- End Modal delete-->
+@endsection
+@section('script')
+	@parent
+	<script>
+		var url = "{{url('/showUserInRole')}}";
+    	$('#editUserModal').on('show.bs.modal', function(event){
+			var button = $(event.relatedTarget)
+			var token = $("input[name='_token'").val()
+			var user_id = button.data('userid');
+			var user_username = button.data('username')
+			var user_email = button.data('email')
+			var user_hoten = button.data('hoten')
+			var user_gioitinh = button.data('gioi_tinh');
+			$('input[name="gioi_tinh"][value="'+user_gioitinh+'"]').prop('checked',true); //check gioi tinh
+			var user_danhso = button.data('danhso');
+			var user_sodienthoai = button.data('so_dien_thoai')
+			var modal = $(this);
+			modal.find('.modal-body #user_id').val(user_id);
+			modal.find('.modal-body #user_username').val(user_username);
+			modal.find('.modal-body #user_email').val(user_email);
+			modal.find('.modal-body #user_hoten').val(user_hoten);
+			modal.find('.modal-body #user_danhso').val(user_danhso);
+			modal.find('.modal-body #user_sodienthoai').val(user_sodienthoai);
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					id: user_id,
+					_token: token
+				},
+				success: function(data){
+					$.each(data, function(key, value){
+						$("#roles").val(value)
+					});
+				},
+			});
+		});
+		$('#deleteUserModal').on('show.bs.modal', function(event){
+			var button = $(event.relatedTarget)
+			var user_id = button.data('userid')
+			var modal = $(this);
+			modal.find('.modal-body #use_id').val(user_id);
+		});
+		
+		
+	</script>
 @endsection

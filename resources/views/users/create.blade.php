@@ -1,6 +1,10 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+    @parent
+    
+@endsection
 @section('content')
-<div class="content-wrapper">
+    <div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
@@ -80,19 +84,17 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputPassword1">Nhập lại mật khẩu: </label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="confirmPassword" name="confirm-password">
+                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="confirmPassword" name="confirm-password">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputFile">Hình nền</label>
-                                    <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}">
-                                </div>
-                                <div class="form-group col-md-6">
+                                
+                                <div class="form-group col-md-12">
                                     <label>Danh số: </label>
                                     <input type="text" name="danhso" class="form-control" value="{{ old('danhso')}}" placeholder="Nhập danh số">
                                 </div>
                             </div>
+                            
                             <div class="form-row">
                                 <strong>Quyền:</strong>
                                 {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
@@ -112,5 +114,68 @@
 		</section>
 		<!-- /.content -->
     </div>
-	<!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
+@endsection
+
+@section('script')
+    @parent
+    <script src="{{URL::asset('public/js/croppie.js')}}"></script>
+    <script>  
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }); 
+
+        $image_crop = $('#image_demo').croppie({
+            enableExif: true,
+            viewport: {
+            width:200,
+            height:200,
+            type:'square' //circle
+            },
+            boundary:{
+            width:300,
+            height:300
+            }
+        });
+
+        $('#upload_image').on('change', function(){
+            var reader = new FileReader();
+            reader.onload = function (event) {
+            $image_crop.croppie('bind', {
+                url: event.target.result
+            }).then(function(){
+                console.log('jQuery bind complete');
+            });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $('#uploadimageModal').modal('show');
+        });
+
+        $('.crop_image').click(function(event){
+            $image_crop.croppie('result', {
+            type: 'canvas',
+            size: 'viewport'
+            }).then(function(response){
+            $.ajax({
+                url:"{{route('croppie')}}",
+                method: "POST",
+                data:{"upload_image": response},
+                dataType:'JSON',
+                success:function(data)
+                {
+                    $('#uploadimageModal').modal('hide');
+                    $('#uploaded_image').html(data.uploaded_image);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError);
+                }
+                
+            });
+            })
+        });
+    });  
+    </script>
 @endsection

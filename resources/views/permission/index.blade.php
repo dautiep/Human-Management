@@ -122,7 +122,7 @@
             <p class="text-center">
                 Bạn có chắc chắn muốn xóa quyền này không? 
             </p>
-                <input type="hidden" name="id_permission" id="permission_id" value="">
+                <input type="hidden" name="id_permission" id="per_id" value="">
 
             </div>
             <div class="modal-footer">
@@ -134,4 +134,26 @@
         </div>
     </div>
     <!-- End Modal delete-->
+@endsection
+@section('script')
+    @parent
+    <script>
+        $('#editPermissionModal').on('show.bs.modal', function(event){
+            var token = $("input[name='_token'").val()
+            var button = $(event.relatedTarget)
+            var permission_id = button.data('permissionid');
+            var permission_name = button.data('permissionname');
+            console.log(permission_name);
+            var modal = $(this);
+            modal.find('.modal-body #permission_name').val(permission_name);
+            modal.find('.modal-body #permission_id').val(permission_id);
+        });
+
+        $('#deletePermissionModal').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget)
+            var permission_id = button.data('permissionid')
+            var modal = $(this);
+            modal.find('.modal-body #per_id').val(permission_id);
+        });
+    </script>
 @endsection

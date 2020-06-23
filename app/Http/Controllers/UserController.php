@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\AddUserRequest;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Hash;
 
@@ -29,7 +30,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $roles = Role::pluck('name','name')->all();
-        $users = User::orderBy('id','ASC')->paginate(5); //lay ra 5 muc trong 1 trang
+        $users = User::orderBy('id','ASC')->get(); //lay ra 5 muc trong 1 trang
         return view('users.index',compact('users', 'roles'))
             ->with('i');
     }
@@ -45,6 +46,27 @@ class UserController extends Controller
         return view('users.create',compact('roles'));
     }
 
+    public function uploadImage(Request $request)
+    {
+        $user =User::find(Auth::user()->id);
+        if($request->ajax())
+        {
+            if($request->upload_image)
+            {
+                $data = $request->upload_image;
+                $image_array_1 = explode(";", $data);
+                $image_array_2 = explode(",", $image_array_1[1]);
+                $data = base64_decode($image_array_2[1]);
+                $imageName = time() . '.png';
+                $path = 'upload/avatar/'.$imageName;
+                file_put_contents($path, $data);
+            }
+            $user->avatar = $imageName;
+            $user->save();
+        }
+        return response()->json($imageName);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -54,28 +76,22 @@ class UserController extends Controller
     public function store(AddUserRequest $request)
     {
         $validated = $request->validated();
-
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
-        //upload avatar len csdl
-        if($request->hasFile('avatar')){
-            $file = $request->file('avatar');
-            $file_extension = $file->getClientOriginalExtension(); //lay duoi file
-            if($file_extension == 'png' || $file_extension == 'jpg' || $file_extension == 'jpeg'){
-
-            }
-            else
-                return redirect()->back()->with('errror', 'Hệ thống chưa hỗ trợ định dạng file mới upload!');
-            $file_name = $file->getClientOriginalName();
+        if($request->gioi_tinh == 1)
+        {
+            $file_name = 'avatar_male.png';
             $random_file_name = str_random(4).'_'.$file_name;
-            while(file_exists('upload/avatar/'.$random_file_name)){
-                $random_file_name = str_random(4).'_'.$file_name; 
-            }
-            $file->move('upload/avatar',$random_file_name);
-            $input['avatar'] = $random_file_name;
+            $input['avatar'] = $file_name;
         }
-        else $input['avatar']='';
+        else
+        {
+            $file_name = 'avatar_female.png';
+            $random_file_name = str_random(4).'_'.$file_name;
+            $input['avatar'] = $file_name;
+        }
+        
 
 
         $user = User::create($input);
