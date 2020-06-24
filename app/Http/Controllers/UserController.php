@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\AddUserRequest;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -51,6 +51,24 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function cropAvatar(Request $request){
+
+        if($request->ajax())
+        {
+            $image_data = $request->uploaded_image;
+            $image_array_1 = explode(";", $image_data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+            $image_name = time() . '.png';
+            $upload_path = 'upload/avatar/'.$image_name;
+            file_put_contents($upload_path, $data);
+            return response()->json(['path' => '/upload/avatar/' . $image_name]);
+        }
+    }
+
+    
+     
     public function store(AddUserRequest $request)
     {
         $validated = $request->validated();
@@ -58,24 +76,37 @@ class UserController extends Controller
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
-        //upload avatar len csdl
-        if($request->hasFile('avatar')){
-            $file = $request->file('avatar');
-            $file_extension = $file->getClientOriginalExtension(); //lay duoi file
-            if($file_extension == 'png' || $file_extension == 'jpg' || $file_extension == 'jpeg'){
-
-            }
-            else
-                return redirect()->back()->with('errror', 'Hệ thống chưa hỗ trợ định dạng file mới upload!');
-            $file_name = $file->getClientOriginalName();
-            $random_file_name = str_random(4).'_'.$file_name;
-            while(file_exists('upload/avatar/'.$random_file_name)){
-                $random_file_name = str_random(4).'_'.$file_name; 
-            }
-            $file->move('upload/avatar',$random_file_name);
-            $input['avatar'] = $random_file_name;
+        if($request->ajax())
+        {
+            $image_data = $request->uploaded_image;
+            $file_name = $image_data->getClientOriginalName();
+            $image_array_1 = explode(";", $image_data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+            $image_name = time() . '.png';
+            $upload_path = 'upload/avatar/'.$image_name;
+            file_put_contents($upload_path, $data);
+            $input['avatar'] = $image_name;
         }
         else $input['avatar']='';
+        //upload avatar len csdl
+        // if($request->hasFile('avatar')){
+        //     $file = $request->file('avatar');
+        //     $file_extension = $file->getClientOriginalExtension(); //lay duoi file
+        //     if($file_extension == 'png' || $file_extension == 'jpg' || $file_extension == 'jpeg'){
+
+        //     }
+        //     else
+        //         return redirect()->back()->with('errror', 'Hệ thống chưa hỗ trợ định dạng file mới upload!');
+        //     $file_name = $file->getClientOriginalName();
+        //     $random_file_name = str_random(4).'_'.$file_name;
+        //     while(file_exists('upload/avatar/'.$random_file_name)){
+        //         $random_file_name = str_random(4).'_'.$file_name; 
+        //     }
+        //     $file->move('upload/avatar',$random_file_name);
+        //     $input['avatar'] = $random_file_name;
+        // }
+        // else $input['avatar']='';
 
 
         $user = User::create($input);

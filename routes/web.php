@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('permissions', 'PermissionController');
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
+    Route::post('/upload-crop-avatar', 'UserController@cropAvatar')->name('croppie');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
 });
 

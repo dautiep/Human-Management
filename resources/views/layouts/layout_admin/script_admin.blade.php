@@ -12,6 +12,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{URL::asset('public/AdminLTE-master/dist/js/demo.js')}}"></script>
 <!-- page script -->
+<script src="{{URL::asset('public/js/croppie.js')}}"></script>
+<!--crop image-->
 
 
 <script>
@@ -95,6 +97,63 @@
         var role_id = button.data('roleid')
         var modal = $(this);
         modal.find('.modal-body #role_id').val(role_id);
+    });
+
+    //upload and crop image
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+});
+
+    $image_crop = $('#image_demo').croppie({
+        enableExif: true,
+        viewport: {
+        width:200,
+        height:200,
+        type:'square' //circle
+        },
+        boundary:{
+        width:300,
+        height:300
+        }
+    });
+
+    $('#upload_image').on('change', function(){
+        var reader = new FileReader();
+        reader.onload = function (event) {
+        $image_crop.croppie('bind', {
+            url: event.target.result
+        }).then(function(){
+            console.log('jQuery bind complete');
+        });
+        }
+        reader.readAsDataURL(this.files[0]);
+        $('#uploadimageModal').modal('show');
+    });
+
+    $('.crop_image').click(function(event){
+        $image_crop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+        }).then(function(response){
+        $.ajax({
+            url:"{{route('users.store')}}",
+            method: "POST",
+            data:{"uploaded_image": response},
+            success:function(data)
+            {
+                $('#uploadimageModal').modal('hide');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+        })
+    });
+
     });
 
     

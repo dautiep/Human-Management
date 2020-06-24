@@ -80,17 +80,29 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputPassword1">Nhập lại mật khẩu: </label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="confirmPassword" name="confirm-password">
+                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="confirmPassword" name="confirm-password">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputFile">Hình nền</label>
-                                    <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}">
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label>Danh số: </label>
                                     <input type="text" name="danhso" class="form-control" value="{{ old('danhso')}}" placeholder="Nhập danh số">
+                                </div>
+                            </div>
+                            <!-- <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="exampleInputFile">Hình nền:</label>
+                                    <input type="file" class="form-control" name="avatar" value="{{old('avatar')}}">
+                                </div>
+                            </div> -->
+                            <div class="form-row">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Select Profile Image</div>
+                                    <div class="panel-body" align="center">
+                                        <input type="file" name="upload_image" id="upload_image" accept="image/*" />
+                                        <br />
+                                        <div id="uploaded_image"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -112,5 +124,34 @@
 		</section>
 		<!-- /.content -->
     </div>
-	<!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
+    <div id="uploadimageModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload & Crop Image</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 text-center">
+                            <div id="image_demo" style="width:350px; margin-top:30px"></div>
+                        </div>
+                        <div class="col-md-4" style="padding-top:30px;">
+                            <br />
+                            <br />
+                            <br/>
+                            <button style="margin-left: 10px;" class="btn btn-success crop_image">Crop & Upload Image</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>  
+          
+    </script>
 @endsection
