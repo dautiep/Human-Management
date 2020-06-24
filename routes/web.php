@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('permissions', 'PermissionController');
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
-    Route::post('/upload-crop-avatar', 'UserController@cropAvatar')->name('croppie');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
+    Route::post('crop_avatar', 'UserController@uploadImage')->name('croppie');
 });
 
 Route::post('/register', 'HomeController@userRegister')->name('user-register');

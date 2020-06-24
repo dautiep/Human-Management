@@ -94,34 +94,9 @@ class HomeController extends Controller
             $input = array_except($input,array('password'));    
         }
 
-        // if($request->hasFile('avatar')){
-        //     $file = $request->file('avatar');
-        //     $file_extension = $file->getClientOriginalExtension(); //lay duoi file
-        //     if($file_extension == 'png' || $file_extension == 'jpg' || $file_extension == 'jpeg'){
-
-        //     }
-        //     else
-        //         return redirect()->back()->with('errror', 'Hệ thống chưa hỗ trợ định dạng file mới upload!');
-        //     $file_name = $file->getClientOriginalName();
-        //     $random_file_name = str_random(4).'_'.$file_name;
-        //     while(file_exists('upload/avatar/'.$random_file_name)){
-        //         $random_file_name = str_random(4).'_'.$file_name; 
-        //     }
-        //     $file->move('upload/avatar',$random_file_name);
-        //     $input['avatar'] = 'upload/avatar/'.$random_file_name;
-        // }
-        
-        // else
-        // {
-        //     $input['avatar']= $user->avatar;
-        // } 
-            
-            
-            
-        
         $user->update($input);
 
-        return redirect()->route('users.show', $user->id)
+        return redirect()->route('profile', $user->id)
                         ->with('success','User updated successfully');
     }
 }

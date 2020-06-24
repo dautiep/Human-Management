@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-@yield('head')
+@section('head')
 @include('layouts.layout_admin.head_admin')
+@show
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         @include('layouts.layout_admin.nav_admin')
@@ -20,7 +21,8 @@
     </div>
     <!-- ./wrapper -->
 
-    @yield('script')
+    @section('script')
     @include('layouts.layout_admin.script_admin')
+    @show
 </body>
 </html>

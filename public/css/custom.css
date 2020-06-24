@@ -1,3 +1,10 @@
-div.row{
-    margin-left: 20px;
+.login-page{
+    background-color: #50ebd6;
+}
+.login-box{
+    width: 400px;
+}
+
+.login-box-msg{
+    text-align: justify;
 }

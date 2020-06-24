@@ -7,23 +7,6 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      @if(Auth::check())
-      <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{URL::asset('upload/avatar/'.Auth::user()->avatar)}}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a class="d-block" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>{{Auth::user()->username}}</a>
-        </div>
-        @endif
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -100,6 +100,17 @@
 	</div>
 	<!-- End Modal delete-->
 @endsection
+@section('script')
+	@parent
+	<script>
+		$('#deleteRoleModal').on('show.bs.modal', function(event){
+			var button = $(event.relatedTarget)
+			var role_id = button.data('roleid')
+			var modal = $(this);
+			modal.find('.modal-body #role_id').val(role_id);
+		});
+	</script>
+@endsection
 	
 
 	

@@ -6,11 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đăng nhập</title>
 
+    
+
     <!-- Font Icon -->
     <link rel="stylesheet" href="public/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
     <link rel="stylesheet" href="public/colorlib-regform-7/css/style.css">
+
+
+   
 </head>
 <body>
 
@@ -28,17 +33,21 @@
                         <form method="POST" action="{{ route('login') }}" class="register-form" id="login-form">
                             @csrf
                             <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Tên tài khoản "/>
+                                <div class="col-md-12">
+                                    <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Tên tài khoản "/>
+                                </div>
 
                                
                             </div>
 
                             <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mật khẩu">
+                                <div class="col-md-12">
+                                    <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mật khẩu" data-toggle="password">
                                     
+                                            
+                                       
                                 </div>                                                                                              
                             </div>
 

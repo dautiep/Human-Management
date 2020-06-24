@@ -1,4 +1,12 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+    @parent
+    <head>
+        <!--Croppie js-->
+        <link rel="stylesheet" href="{{URL::asset('public/css/croppie.css')}}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    </head>
+@endsection
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -6,15 +14,24 @@
         <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Profile</h1>
+                <div class="col-sm-6">
+                    <h1>Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                    </ol>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">User Profile</li>
-                </ol>
-            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-body">
+                        <div class="card-header">
+                            @include('layouts.errors')
+                        </div>
+                    </div>
+                </div>
             </div>
         </div><!-- /.container-fluid -->
         </section>
@@ -51,7 +68,10 @@
                     </li>
                     </ul>
 
-                    <a href="#" class="btn btn-primary btn-block"><b>Cập nhật avatar</b></a>
+                    
+                    <label class="btn btn-primary btn-block" style="cursor: pointer;">
+                        Cập nhật avatar<input type="file" id="upload_image" style="display: none;">
+                    </label>
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -138,4 +158,93 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <!--Modal update avatar-->
+    <div id="uploadimageModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload & Crop Image</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 text-center">
+                            <div id="image_demo" style="width:350px; margin-top:30px"></div>
+                         </div>
+                        <div class="col-md-4" style="padding-top:30px;">
+                            <br />
+                            <br />
+                            <br/>
+                            <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    @parent
+    <script src="{{URL::asset('public/js/croppie.js')}}"></script>
+    <script>  
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            }); 
+
+            $image_crop = $('#image_demo').croppie({
+                enableExif: true,
+                viewport: {
+                width:200,
+                height:200,
+                type:'square' //circle
+                },
+                boundary:{
+                width:300,
+                height:300
+                }
+            });
+
+            $('#upload_image').on('change', function(){
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                $image_crop.croppie('bind', {
+                    url: event.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+                }
+                reader.readAsDataURL(this.files[0]);
+                $('#uploadimageModal').modal('show');
+            });
+
+            $('.crop_image').click(function(event){
+                $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+                }).then(function(response){
+                $.ajax({
+                    url:"{{route('croppie')}}",
+                    method: "POST",
+                    data:{"upload_image":response},
+                    dataType:'JSON',
+                    success:function(data)
+                    {
+                        $('#uploadimageModal').modal('hide');
+                        
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError);
+                    }
+                    
+                });
+                })
+            });
+        });  
+    </script>
 @endsection

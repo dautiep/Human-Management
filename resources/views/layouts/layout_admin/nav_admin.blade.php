@@ -98,10 +98,40 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
+        @if(Auth::check())
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel d-flex">
+          <div class="image">
+            <img src="{{URL::asset('upload/avatar/'.Auth::user()->avatar)}}" class="img-circle elevation-2" alt="User Image">
+          </div>
+        </div>
+        @endif
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          @if(Auth::check())
+            {{Auth::user()->username}}
+          @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">Tùy chọn</span>
+          <div class="dropdown-divider"></div>
+          <a href="{{route('profile')}}" class="dropdown-item">
+            <i class="fas fa-id-card-alt"></i> Cài đặt thông tin
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
+            <i class="fas fa-sign-out-alt"></i>  Đăng xuất
+          </a>
+        </div>
+      </li>
+      
+      
     </ul>
 </nav>
 <!-- /.navbar -->
