@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class ResetPassword extends Notification
 {
@@ -41,10 +42,11 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your Reset Password Subject Here')
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url('password/reset', $this->token))
-            ->line('If you did not request a password reset, no further action is required.');
+            ->subject('Yêu cầu thay đổi mật khẩu')
+            ->line('Bạn nhận được email này bởi vì chúng tối đã gửi tới tài khoản của bạn một yêu cầu thay đổi mật khẩu')
+            ->action('Đặt lại mật khẩu', url('password/reset', $this->token))
+            ->line(Lang::get('Yêu cầu này sẽ hết hạn trong :count phút.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line('Nếu bạn không có yêu cầu đặt lại mật khẩu, không cần nhấn vào nút "Đặt lại mật khẩu".');
     }
 
     /**

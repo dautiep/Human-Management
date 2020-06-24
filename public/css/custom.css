@@ -8,3 +8,9 @@
 .login-box-msg{
     text-align: justify;
 }
+span{
+    cursor: pointer;
+}
+span #faclose{
+    display: none;
+}

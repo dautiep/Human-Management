@@ -21,13 +21,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // function __construct()
-    // {
-    //      $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-    //      $this->middleware('permission:user-create', ['only' => ['create','store']]);
-    //      $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-    //      $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
 
     public function index(Request $request)
     {
@@ -76,23 +76,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function cropAvatar(Request $request){
-
-        if($request->ajax())
-        {
-            $image_data = $request->uploaded_image;
-            $image_array_1 = explode(";", $image_data);
-            $image_array_2 = explode(",", $image_array_1[1]);
-            $data = base64_decode($image_array_2[1]);
-            $image_name = time() . '.png';
-            $upload_path = 'upload/avatar/'.$image_name;
-            file_put_contents($upload_path, $data);
-            return response()->json(['path' => '/upload/avatar/' . $image_name]);
-        }
-    }
-
-    
-     
     public function store(AddUserRequest $request)
     {
         $validated = $request->validated();
