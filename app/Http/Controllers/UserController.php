@@ -21,18 +21,18 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    function __construct()
-    {
-         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:user-create', ['only' => ['create','store']]);
-         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    }
+    // function __construct()
+    // {
+    //      $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+    //      $this->middleware('permission:user-create', ['only' => ['create','store']]);
+    //      $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+    //      $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    // }
 
     public function index(Request $request)
     {
         $roles = Role::pluck('name','name')->all();
-        $users = User::orderBy('id','ASC')->get(); //lay ra 5 muc trong 1 trang
+        $users = User::orderBy('id','ASC')->get();
         return view('users.index',compact('users', 'roles'))
             ->with('i');
     }

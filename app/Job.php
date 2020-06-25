@@ -18,7 +18,8 @@ class Job extends Model
         'thoigian_offer',
         'thoigian_den_onboard',
         'id_user',
-        'id_duan'
+        'id_duan',
+        'trang_thai'
     ];
 
     public function duan()

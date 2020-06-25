@@ -66,9 +66,9 @@
 						</div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label >Hình ảnh:</label>
-                                <br>
-                                <img src="{{URL::asset('upload/avatar/'.$user->avatar)}}" width="150px">
+								<label >Hình nền:</label>
+								<br>
+								<img  src="{{URL::asset('upload/avatar/'.$user->avatar)}}" width="150px">
                             </div>
                         </div>
                     </form>

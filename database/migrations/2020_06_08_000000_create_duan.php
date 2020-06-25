@@ -21,6 +21,10 @@ class CreateDuan extends Migration
             $table->date('thoigian_batdau');
             $table->date('thoigian_ketthuc');
             $table->timestamps();
+
+            //foreign key
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

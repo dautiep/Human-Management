@@ -13,7 +13,8 @@ class Duan extends Model
         'ten_du_an',
         'quymo_trungbinh',
         'thoigian_batdau',
-        'thoigian_ketthuc'
+        'thoigian_ketthuc',
+        'id_user'
     ];
 
     public function job()
@@ -23,6 +24,6 @@ class Duan extends Model
 
     public function user()
     {
-        return $this->hasMany('App\User', 'id_duan', 'id');
+        return $this->belongsTo('App\User', 'id_user', 'id');
     }
 }

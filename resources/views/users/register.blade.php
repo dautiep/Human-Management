@@ -90,7 +90,7 @@
                                 
                                 <div class="form-radio">
                                     <div class="label-flex">
-                                        <label for="payment">Sex: </label>
+                                        <label for="payment">Gender: </label>
                                     </div>
                                     <div class="form-radio-group">            
                                         <div class="form-radio-item">

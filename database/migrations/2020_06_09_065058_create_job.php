@@ -23,6 +23,7 @@ class CreateJob extends Migration
             $table->integer('songay_tieuchuan_vitri');
             $table->date('thoigian_offer');
             $table->date('thoigian_den_onboard');
+            $table->tinyInteger('trang_thai');
             
 
             //foreign key
