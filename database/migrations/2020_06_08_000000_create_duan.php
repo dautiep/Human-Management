@@ -20,6 +20,7 @@ class CreateDuan extends Migration
             $table->integer('quymo_tbinh');
             $table->date('thoigian_batdau');
             $table->date('thoigian_ketthuc');
+            $table->text('mota_duan');
             $table->timestamps();
 
             //foreign key

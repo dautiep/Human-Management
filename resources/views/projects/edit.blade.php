@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Dự án mới</h1>
+                <h1>Sửa thông tin dự án</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -24,8 +24,10 @@
             <div class="card-header">
                 @include('layouts.errors')
             </div>
-            <form action="{{route('projects.store')}}" method="post">
+            <!--Dung method post trên form để cho html hiểu và @method('patch') để đối lại method cho function-->
+            <form action="{{route('projects.update', $project->slug)}}" method="POST">
                 @csrf
+                @method('PATCH')
                 <div class="row">
                     <div class="col-md-6">
                     <div class="card card-primary">
@@ -40,22 +42,21 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputName">Tên dự án</label>
-                                <input type="text" name="ten_du_an" class="form-control" value="{{ old('ten_du_an')}}" placeholder="Nhập tên dự án">
+                                <input type="text" name="ten_du_an" class="form-control" value="{{$project->ten_du_an}}" placeholder="Nhập tên dự án">
                             </div>
                             <div class="form-group">
                                 <label>Quy mô trung bình</label>
-                                <input type="number" name="quymo_tbinh" class="form-control" placeholder="Nhập số lượng ứng viên" value="{{old('quymo_tbinh')}}">
+                                <input type="number" name="quymo_tbinh" class="form-control" placeholder="Nhập số lượng ứng viên" value="{{$project->quymo_tbinh}}">
                             </div>
                             <div class="form-group">
                                 <label for="inputDescription">Mô tả dự án</label>
-                                <textarea id="inputDescription" class="form-control" name="mota_duan" rows="10" placeholder="Nhập mô tả dự án"></textarea>
+                                <textarea id="inputDescription" class="form-control" name="mota_duan" rows="10" placeholder="Nhập mô tả dự án" >{{$project->mota_duan}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="inputStatus">User tạo dự án</label>
                                 <select class="form-control custom-select" name="id_user">
-                                    <option value="" selected disabled>-Chọn tên người tạo dự án-</option>4
                                     @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->hoten}}</option>
+                                        <option value="{{$user->id}}" {{($project->id_user == $user->id)?'selected':''}}>{{$user->hoten}}</option>
                                     @endforeach
                                     
                                 </select>
@@ -82,11 +83,11 @@
                         </div>
                         <div class="form-group">
                             <label for="inputSpentBudget">Thời gian bắt đầu</label>
-                            <input type="date" id="inputSpentBudget" name="thoigian_batdau" class="form-control">
+                            <input type="date" id="inputSpentBudget" name="thoigian_batdau" class="form-control" value="{{$project->thoigian_batdau}}">
                         </div>
                         <div class="form-group">
                             <label for="inputEstimatedDuration">Thời gian kết thúc</label>
-                            <input type="date" id="inputEstimatedDuration" name="thoigian_ketthuc" class="form-control">
+                            <input type="date" id="inputEstimatedDuration" name="thoigian_ketthuc" class="form-control" value="{{$project->thoigian_ketthuc}}">
                         </div>
                         </div>
                         <!-- /.card-body -->
@@ -96,8 +97,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                    <a href="{{route('projects.index')}}" class="btn btn-secondary">Cancel</a>
-                    <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+                    <a href="{{route('projects.index')}}" class="btn btn-secondary">Hủy bỏ</a>
+                    <input type="submit" value="Lưu thông tin" class="btn btn-success float-right">
                     </div>
                 </div>
             </form>
@@ -105,4 +106,4 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@endsection()
+@endsection

@@ -117,7 +117,7 @@
                                 </div>
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Số điện thoại:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="so_dien_thoai" placeholder="Số ddienj thoại" value="{{Auth::user()->so_dien_thoai}}">
+                                    <input type="text" class="form-control" name="so_dien_thoai" placeholder="Số điện thoại" value="{{Auth::user()->so_dien_thoai}}">
                                 </div>
                             </div>
                             <div class="form-group row">

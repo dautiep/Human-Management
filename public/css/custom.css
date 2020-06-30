@@ -14,3 +14,11 @@ span{
 span #faclose{
     display: none;
 }
+
+.page-title
+.title_left h3{
+    margin-left: 15px;
+}
+
+
+

@@ -9,9 +9,10 @@ class Duan extends Model
     protected $table = 'duan';
     public $timestamp = false;
     protected $fillable = [
-        'slug',
         'ten_du_an',
-        'quymo_trungbinh',
+        'slug',
+        'quymo_tbinh',
+        'mota_duan',
         'thoigian_batdau',
         'thoigian_ketthuc',
         'id_user'

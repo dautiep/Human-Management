@@ -45,7 +45,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+							@foreach($projects as $project)
+								<tr>
+									<td>{{++$i}}</td>
+									<td>{{$project->ten_du_an}}</td>
+									<td>{{$project->quymo_tbinh}}</td>
+									<td>{{$project->thoigian_batdau}}</td>
+									<td>{{$project->thoigian_ketthuc}}</td>
+									
+									<td>
+										<a class = "btn btn-info" href="{{route('projects.show', $project->slug)}}">Show</a>
+										<a class="btn btn-primary" href="{{route('projects.edit', $project->slug)}}">Edit</a>
+										<button class="btn btn-danger"  data-projectslug="{{$project->slug}}" data-toggle="modal" data-target="#deleteProjectModal">Delete</button>
+									</td>
+								</tr>
+							@endforeach
 						</tbody>
 						
 						<tfoot>
@@ -71,95 +85,23 @@
 		<!-- /.content -->
     </div>
 	<!-- /.content-wrapper -->
-	<!-- Modal Edit -->
-	<div class="modal modal-danger fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-					<h4 class="modal-title text-center" id="myModalLabel">Sửa thông tin người dùng</h4>
-				</div>
-				<form enctype="multipart/form-data" action="{{ route('users.update', 'test') }}" method="post">
-					{{method_field('patch')}}
-					<input type="hidden" name="_token" value="{{csrf_token()}}">
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Tên tài khoản: </label>
-							{!! Form::text('username', null, array('placeholder' => 'Username','class' => 'form-control', 'id' => 'user_username')) !!}
-						</div>
-						<div class="form-group">
-							<label>Email:</label>
-							{!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'id' => 'user_email')) !!}
-						</div>
-						<div class="form-group">
-							<label>Mật khẩu:</label>
-							{!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
-						</div>
-						<div class="form-group">
-							<label>Nhập lại mật khẩu:</label>
-							{!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-						</div>
-						<div class="form-group">
-							<label>Họ tên:</label>
-							{!! Form::text('hoten', null, array('placeholder' => 'Full Name','class' => 'form-control', 'id' => 'user_hoten')) !!}
-						</div>
-						<div class="form-group">
-							<label>Giới tính:</label>
-							<div class="form-radio-group">            
-								<div class="form-radio-item">
-									<input type="radio" name="gioi_tinh" id="cash" value="1">
-									<label for="cash">Nam</label>
-									<span class="check"></span>
-								</div>
-								<div class="form-radio-item">
-									<input type="radio" name="gioi_tinh" id="cheque" value="0">
-									<label for="cheque">Nữ</label>
-									<span class="check"></span>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label>Danh số::</label>
-							{!! Form::text('danhso', null, array('placeholder' => 'Danh số','class' => 'form-control', 'id' => 'user_danhso')) !!}
-						</div>
-						<div class="form-group">
-							<label>Số điện thoại:</label>
-							{!! Form::text('so_dien_thoai', null, array('placeholder' => 'Số điện thoại','class' => 'form-control', 'id' => 'user_sodienthoai')) !!}
-						</div>
-						<div class="form-group">
-							<label>Avatar:</label>
-							<input type="file" class="form-control" name="avatar" id="user_avatar" value="{{old('avatar')}}">
-						</div>
-						
-						
-						<input type="hidden" name="id_user" id="user_id" value="">
-					</div>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-					<button type="submit" class="btn btn-warning" data-target="#myModal">Lưu cập nhật</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- End Modal Edit-->
 
 	<!-- Modal Delete -->
-	<div class="modal modal-danger fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal modal-danger fade" id="deleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
 			<h4 class="modal-title text-center" id="myModalLabel">Thông báo</h4>
 			</div>
-			<form action="{{route('users.destroy', 'test')}}" method="post">
+			<form action="{{route('projects.destroy', 'test')}}" method="post">
 				{{method_field('delete')}}
 				{{csrf_field()}}
 			<div class="modal-body">
 			<p class="text-center">
-				Bạn có chắc chắn muốn xóa tài khoản này không? 
+				Bạn có chắc chắn muốn xóa dự án này không? 
 			</p>
-				<input type="hidden" name="id_user" id="use_id" value="">
+				<input type="hidden" name="slug_project" id="project_slug" value="">
 
 			</div>
 			<div class="modal-footer">
@@ -174,5 +116,14 @@
 @endsection
 @section('script')
 	@parent
+
+	<script>
+		$('#deleteProjectModal').on('show.bs.modal', function(event){
+			var button = $(event.relatedTarget)
+			var project_slug = button.data('projectslug')
+			var modal = $(this);
+			modal.find('.modal-body #project_slug').val(project_slug);
+		});
+	</script>
 	
 @endsection
