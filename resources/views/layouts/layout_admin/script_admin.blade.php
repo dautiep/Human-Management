@@ -15,8 +15,10 @@
 <script src="{{URL::asset('public/AdminLTE-master/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{URL::asset('public/AdminLTE-master/dist/js/adminlte.min.js')}}"></script>
-<script src="{{URL::asset('public/js/croppie.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{URL::asset('public/AdminLTE-master/dist/js/demo.js')}}"></script>
 <!--crop image-->
+<script src="{{URL::asset('public/js/croppie.js')}}"></script>
 
 
 <!-- page script -->

@@ -127,7 +127,7 @@
                         </div>
                         <div class="form-submit">
                             
-                            <input type="submit" value="Submit" class="submit" id="submit" name="submit" />
+                            <input type="submit" value="Register" class="submit" id="submit" name="submit" />
                             <input type="submit" value="Reset" class="submit" id="reset" name="reset" />
                         </div>
                     </form>

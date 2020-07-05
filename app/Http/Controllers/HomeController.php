@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Duan;
-use Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth; //important
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 
 
 class HomeController extends Controller
@@ -45,24 +46,19 @@ class HomeController extends Controller
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
-        //upload avatar len csdl
-        if($request->hasFile('avatar')){
-            $file = $request->file('avatar');
-            $file_extension = $file->getClientOriginalExtension(); //lay duoi file
-            if($file_extension == 'png' || $file_extension == 'jpg' || $file_extension == 'jpeg'){
-
-            }
-            else
-                return redirect()->back()->with('errror', 'Hệ thống chưa hỗ trợ định dạng file mới upload!');
-            $file_name = $file->getClientOriginalName();
+        //avatar
+        if($request->gioi_tinh == 1)
+        {
+            $file_name = 'avatar_male.png';
             $random_file_name = str_random(4).'_'.$file_name;
-            while(file_exists('upload/avatar/'.$random_file_name)){
-                $random_file_name = str_random(4).'_'.$file_name; 
-            }
-            $file->move('upload/avatar',$random_file_name);
-            $input['avatar'] = 'upload/avatar/'.$random_file_name;
+            $input['avatar'] = $file_name;
         }
-        else $input['avatar']='';
+        else
+        {
+            $file_name = 'avatar_female.png';
+            $random_file_name = str_random(4).'_'.$file_name;
+            $input['avatar'] = $file_name;
+        }
 
         $user = User::create($input);
         return redirect()->route('login');
@@ -78,7 +74,8 @@ class HomeController extends Controller
         return view('users.profile', compact('profile'));
     }
 
-    public function updateUserProfile(Request $request){
+    public function updateUserProfile(Request $request)
+    {
         $user =User::find(Auth::user()->id);
         $this->validate($request, [
             'username' => 'required',
@@ -98,5 +95,30 @@ class HomeController extends Controller
 
         return redirect()->route('profile', $user->id)
                         ->with('success','User updated successfully');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', new MatchOldPassword],
+            'new_password' => 'required',
+            'confirm_password' => 'same:new_password',
+        ],
+
+        [
+            'required' => 'Bạn phải nhập :attribute',
+            'same' => ':attribute và mật khẩu mới phải trùng nhau'
+        ],
+
+        [
+            'password' => 'mật khẩu hiện tại',
+            'new_password' => 'mật khẩu mới',
+            'confirm_password' => 'Mật khẩu xác thực'
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+        return redirect()->route('profile')
+                        ->with('success','Password updated successfully');
     }
 }

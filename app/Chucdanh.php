@@ -17,4 +17,9 @@ class Chucdanh extends Model
     {
         return $this->hasMany('App\Ungvien', 'id_job', 'id');
     }
+
+    public function job()
+    {
+        return $this->hasMany('App\Job', 'id_chucdanh', 'id');
+    }
 }

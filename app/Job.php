@@ -19,6 +19,7 @@ class Job extends Model
         'thoigian_den_onboard',
         'id_user',
         'id_duan',
+        'id_chucdanh',
         'trang_thai'
     ];
 
@@ -30,6 +31,11 @@ class Job extends Model
     public function user()
     {
         return $this->belongsTo('App\Users', 'id_user', 'id');
+    }
+
+    public function chucdanh()
+    {
+        return $this->belongsTo('App\Chucdanh', 'id_duan', 'id');
     }
 
     public function ungvien()
