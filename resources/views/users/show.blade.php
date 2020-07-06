@@ -8,13 +8,15 @@
 		@include('layouts.errors')
 		<div class="container-fluid">
 			<div class="row mb-2">
-				<div class="col-sm-6">
+				<div class="col-sm-8">
 					<h1>Thông tin chi tiết người dùng</h1>
 				</div>
 				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('users.index')}}"> Back</a>
-				</div>
-				<div class="col-sm-4">
+                    <div class="breadcrumb float-sm-right">
+                        <a href="{{route('users.index')}}" class="btn btn-primary">Trở về</a>
+                    </div>
+                </div>
+				<div class="col-sm-2">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
 						<li class="breadcrumb-item active">Detail User</li>

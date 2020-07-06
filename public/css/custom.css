@@ -20,5 +20,9 @@ span #faclose{
     margin-left: 15px;
 }
 
+.toast-top-right{
+    top: 103px !important;
+}
+
 
 

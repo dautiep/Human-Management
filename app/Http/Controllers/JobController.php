@@ -61,9 +61,10 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ma_job)
     {
-        //
+        $job = Job::where('ma_job','LIKE',"{$ma_job}")->first();
+        return view('jobs.show', ['job' => $job]);
     }
 
     /**

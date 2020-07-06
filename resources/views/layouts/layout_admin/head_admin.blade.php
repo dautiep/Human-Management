@@ -21,5 +21,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!--Crop image-->
   <link rel="stylesheet" href="{{URL::asset('public/css/croppie.css')}}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{URL::asset('public/css/toastr.min.css')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

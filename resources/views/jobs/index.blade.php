@@ -53,7 +53,7 @@
 										<td>{{$job->chucdanh->ten_chuc_danh}}</td>
 										<td>{{$job->so_luong_tuyen}}</td>
 										<td>
-											<a class = "btn btn-info" href="#">Show</a>
+											<a class = "btn btn-info" href="{{route('jobs.show', $job->ma_job)}}">Show</a>
 											<a class="btn btn-primary" >Edit</a>
 											<button class="btn btn-danger"  
 												data-toggle="modal" data-target="#deletePositionModal">Delete
