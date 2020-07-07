@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\M_Permission;
-use DB;
 
 class PermissionController extends Controller
 {
@@ -31,12 +29,25 @@ class PermissionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:permissions,name'
-        ]);
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'name' => 'Tên quyền',
+        ] );
         $input = $request->all();
         $permissions = M_Permission::create($input);
+        $notification = array(
+            'message' => 'Tạo Permission thành công', 
+            'alert-type' => 'success'
+          );
 
         return redirect()->route('permissions.index')
-                        ->with('success','permissions created successfully');
+                        ->with($notification);
     }
 
     public function update(Request $request)
@@ -44,18 +55,36 @@ class PermissionController extends Controller
         $permission = M_Permission::findOrFail($request->id_permission);
         $this->validate($request, [
             'name' => 'required|unique:permissions,name'
-        ]);
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'name' => 'Tên quyền',
+        ] );
         $input = $request->all();
+        
         $permission->update($input);
+        $notification = array(
+            'message' => 'Cập nhật Permission thành công', 
+            'alert-type' => 'info'
+          );
         return redirect()->route('permissions.index')
-                        ->with('success','Permission updated successfully');
+                        ->with($notification);
     }
 
     public function destroy(Request $request)
     {
         $permission = M_Permission::findOrFail($request->id_permission);
         $permission->delete();
+        $notification = array(
+            'message' => 'Xóa Permission thành công', 
+            'alert-type' => 'warning'
+          );
         return redirect()->route('permissions.index')
-                        ->with('success','Permssion deleted successfully');
+                        ->with($notification);
     }
 }

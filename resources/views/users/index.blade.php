@@ -9,20 +9,20 @@
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-8">
-					<h1>Bảng người dùng</h1>
-				</div>
-				<div class="col-sm-2">
-					<div class="breadcrumb float-sm-right">
-						<a class="btn btn-success" href="{{route('users.create')}}"> Create New User</a>
+					<div class="col-sm-8">
+						<h1>Bảng người dùng</h1>
 					</div>
-				</div>
-				<div class="col-sm-2">
-					<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item active">DataTables</li>
-					</ol>
-				</div>
+					<div class="col-sm-2">
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-success" href="{{route('users.create')}}"> Create New User</a>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">DataTables</li>
+						</ol>
+					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -39,58 +39,61 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-					<table id="example1" class="table table-bordered">
-						<thead>
-							<tr>
-								<th style="width: 10px;">No</th>
-								<th style="width: 100px;">Tên tài khoản</th>
-								<th style="width: 150px;">Email</th>
-								<th style="width: 150px;">Họ tên</th>
-								<th style="width: 50px;">Avatar</th>
-								<th style="width: 130px;">Quyền</th>
-								<th>Thao tác</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($users as $user)
+						<table id="user-table" class="table table-bordered">
+							<thead>
 								<tr>
-									<td>{{++$i}}</td>
-									<td>{{$user->username}}</td>
-									<td>{{$user->email}}</td>
-									<td>{{$user->hoten}}</td>
-									<td><img width="80px" class="img-circle" src="{{URL::asset('upload/avatar/'.$user->avatar)}}" alt="{{$user->avatar}}" ></td>
-									<td>
-										@if(!empty($user->getRoleNames()))
-											@foreach($user->getRoleNames() as $v)
-											<label class="badge badge-success">{{ $v }}</label>
-											@endforeach
-										@endif 
-									</td>
-									<td>
-										<a class = "btn btn-info" href="{{route('users.show', $user->id)}}">Show</a>
-										<a class="btn btn-primary" data-userid={{$user->id}} data-username="{{$user->username}}"
-											data-email={{$user->email}} data-hoten="{{$user->hoten}}" 
-											data-gioi_tinh={{$user->gioi_tinh}}
-											data-danhso={{$user->danhso}} data-so_dien_thoai="{{$user->so_dien_thoai}}"
-											data-toggle="modal" data-target="#editUserModal">Edit</a>
-										<button class="btn btn-danger"  data-userid={{$user->id}} data-toggle="modal" data-target="#deleteUserModal">Delete</button>
-									</td>
+									<th style="width: 10px;">NO</th>
+									<th style="width: 150px;">TÊN TÀI KHOẢN</th>
+									<th style="width: 150px;">EMAIL</th>
+									<th style="width: 150px;">HỌ TÊN</th>
+									<th style="width: 100px;">GIỚI TÍNH</th>
+									<th style="width: 50px;">AVATAR</th>
+									<th style="width: 130px;">QUYỀN</th>
+									<th style="width: 200px;">THAO TÁC</th>
 								</tr>
-							@endforeach
-						</tbody>
-						
-						<tfoot>
-							<tr>
-								<th>No</th>
-								<th>Tên tài khoản</th>
-								<th>Email</th>
-								<th>Họ tên</th>
-								<th>Avatar</th>
-								<th>Quyền</th>
-								<th>Thao tác</th>
-							</tr>
-						</tfoot>
-					</table>
+							</thead>
+							<tbody>
+								@foreach($users as $user)
+									<tr>
+										<td>{{++$i}}</td>
+										<td>{{$user->username}}</td>
+										<td>{{$user->email}}</td>
+										<td>{{$user->hoten}}</td>
+										<td>{{($user->gioi_tinh == 0)? 'Nam':'Nữ'}}</td>
+										<td><img width="80px" class="img-circle" src="{{URL::asset('upload/avatar/'.$user->avatar)}}" alt="{{$user->avatar}}" ></td>
+										<td>
+											@if(!empty($user->getRoleNames()))
+												@foreach($user->getRoleNames() as $v)
+												<label class="badge badge-success">{{ $v }}</label>
+												@endforeach
+											@endif 
+										</td>
+										<td>
+											<a class = "btn btn-info" href="{{route('users.show', $user->id)}}">Show</a>
+											<a class="btn btn-primary" data-userid={{$user->id}} data-username="{{$user->username}}"
+												data-email={{$user->email}} data-hoten="{{$user->hoten}}" 
+												data-gioi_tinh={{$user->gioi_tinh}}
+												data-danhso={{$user->danhso}} data-so_dien_thoai="{{$user->so_dien_thoai}}"
+												data-toggle="modal" data-target="#editUserModal">Edit</a>
+											<button class="btn btn-danger"  data-userid={{$user->id}} data-toggle="modal" data-target="#deleteUserModal">Delete</button>
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+							
+							<tfoot>
+								<tr>
+									<th>NO</th>
+									<th>TÊN TÀI KHOẢN</th>
+									<th>EMAIL</th>
+									<th>HỌ TÊN</th>
+									<th>GIỚI TÍNH</th>
+									<th>AVATAR</th>
+									<th>QUYỀN</th>
+									<th>THAO TÁC</th>
+								</tr>
+							</tfoot>
+						</table>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -221,8 +224,20 @@
 @endsection
 @section('script')
 	@parent
+	<!-- datatable script -->
+	<script>
+		$(function () {
+			$("#user-table").DataTable({
+				"scrollX": true,
+			});
+		});
+		
+	</script>
+
+	<!-- user modal -->
 	<script>
 		var url = "{{url('/showUserInRole')}}";
+		//edit user
     	$('#editUserModal').on('show.bs.modal', function(event){
 			var button = $(event.relatedTarget)
 			var token = $("input[name='_token'").val()
@@ -256,13 +271,13 @@
 				},
 			});
 		});
+
+		//delete user
 		$('#deleteUserModal').on('show.bs.modal', function(event){
 			var button = $(event.relatedTarget)
 			var user_id = button.data('userid')
 			var modal = $(this);
 			modal.find('.modal-body #use_id').val(user_id);
 		});
-		
-		
 	</script>
 @endsection

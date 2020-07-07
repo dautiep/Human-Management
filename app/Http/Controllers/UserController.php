@@ -102,7 +102,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles')); //chon quyen cho user
 
         $notification = array(
-            'message' => 'User created Successfully', 
+            'message' => 'Tạo tài khoản người dùng thành công', 
             'alert-type' => 'success'
           );
 
@@ -196,8 +196,8 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         $notification = array(
-            'message' => 'User update Successfully', 
-            'alert-type' => 'success'
+            'message' => 'Cập nhật tài khoản người dùng thành công', 
+            'alert-type' => 'info'
           );
 
         return redirect()->route('users.index')
@@ -215,7 +215,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->id_user);
         $user->delete();
         $notification = array(
-            'message' => 'User deleted Successfully', 
+            'message' => 'Xóa tài khoản người dùng thành công', 
             'alert-type' => 'warning'
           );
         return redirect()->route('users.index')
