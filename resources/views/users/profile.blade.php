@@ -236,6 +236,7 @@
                     success:function(data)
                     {
                         $('#uploadimageModal').modal('hide');
+                        location.reload();
                         
                     },
                     error: function (xhr, ajaxOptions, thrownError) {

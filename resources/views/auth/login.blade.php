@@ -60,18 +60,6 @@
                                 <button type="submit" class="btn-register">
                                     <span>{{ __('Đăng nhập') }}</span>
                                 </button>
-                                <div style="color: red;">
-                                    @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
                             </div>
                         </form>
                         <div class="social-login">
