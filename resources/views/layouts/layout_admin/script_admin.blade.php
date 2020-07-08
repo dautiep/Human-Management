@@ -31,52 +31,32 @@
     "positionClass": "toast-top-right",
     "preventDuplicates": false,
     "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
     "timeOut": "3000",
     "extendedTimeOut": "3000"
     }
 
     @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch(type){
-        case 'info':
-            toastr.info("{{ Session::get('message') }}");
-            break;
-        
-        case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
-            break;
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
 
-        case 'success':
-            toastr.success("{{ Session::get('message') }}");
-            break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
 
-        case 'error':
-            toastr.error("{{ Session::get('message') }}");
-            break;
-    }
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
     @endif
 </script>
 
 
-<!-- page script -->
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-    
-</script>
+
 

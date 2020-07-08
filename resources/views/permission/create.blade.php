@@ -5,18 +5,20 @@
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Tạo mới permission</h1>
-				</div>
-				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('permissions.index')}}">Back</a>
-				</div>
-				<div class="col-sm-4">
-					<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="{{route('permissions.index')}}">Home</a></li>
-					<li class="breadcrumb-item active">Create Permission</li>
-					</ol>
-				</div>
+					<div class="col-sm-8">
+						<h1>Permission mới</h1>
+					</div>
+					<div class="col-sm-2">
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-primary" href="{{route('permissions.index')}}">Trở về</a>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="{{route('permissions.index')}}">Home</a></li>
+							<li class="breadcrumb-item active">Create Permission</li>
+						</ol>
+					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -29,8 +31,7 @@
 			<div class="col-12">
 				<div class="card-body">
 					<div class="card-header">
-						@include('layouts.errors')
-					</div>
+					</div>	
 					<!-- /.card-header -->
 					<div class="card-body">
                     <form role="form" action="{{route('permissions.store')}}" method="post">
@@ -38,7 +39,10 @@
                         <div class="card-body">
                         <div class="form-group">
                             <label for="exampleName">Tên Permissions:</label>
-                            <input type="text" class="form-control" id="name" placeholder="Permissions" name="name" value="{{old('name')}}">
+							<input type="text" class="form-control" id="name" placeholder="Nhập tên quyền" name="name" value="{{old('name')}}">
+							@error('name')
+								<p style="color: red;"><i><b>{{$message}}</b></i></p>
+							@enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleName">Guard_name:</label>
@@ -63,3 +67,4 @@
     </div>
 	<!-- /.content-wrapper -->
 @endsection
+@section

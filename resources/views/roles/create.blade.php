@@ -6,13 +6,15 @@
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>Tạo role</h1>
+					<div class="col-sm-8">
+						<h1>Role mới</h1>
 					</div>
 					<div class="col-sm-2">
-						<a class="btn btn-success" href="{{route('roles.index')}}"> Back</a>
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-primary" href="{{route('roles.index')}}">Trở về</a>
+						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-2">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Create</li>
@@ -26,38 +28,46 @@
 		<section class="content">
 			<div class="row">
 				<div class="col-12">
-					<div class="card-header">
-						@include('layouts.errors')
-					</div>
-					<!-- /.card-header -->
 					<div class="card-body">
-                    <form action="{{route('roles.store')}}" method="post" >
-                        @csrf
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Name:</strong>
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Permission:</strong>
-                                    <br/>
-                                    @foreach($permission as $value)
-                                        <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                        {{ $value->name }}</label>
-                                    <br/>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-                    </form>
+						<div class="card-header">
+							
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							<form action="{{route('roles.store')}}" method="post" >
+								@csrf
+								<div class="row">
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Tên role:</strong>
+											{!! Form::text('name', null, array('placeholder' => 'Nhập tên role','class' => 'form-control')) !!}
+											@error('name')
+												<p style="color: red;"><i><b>{{$message}}</b></i></p>
+											@enderror
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Quyền:</strong>
+											<br/>
+											@foreach($permission as $value)
+												<label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+												{{ $value->name }}</label>
+											<br/>
+											@endforeach
+											@error('permission')
+												<p style="color: red;"><i><b>{{$message}}</b></i></p>
+											@enderror
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<button type="submit" class="btn btn-primary">Thêm</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.card-body -->
 					</div>
-					<!-- /.card-body -->
 				</div>
 				<!-- /.col -->
 			</div>

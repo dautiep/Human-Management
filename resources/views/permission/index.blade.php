@@ -1,22 +1,28 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
     <div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Bảng Permissions</h1>
-				</div>
-				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('permissions.create')}}"> Create New Permission</a>
-				</div>
-				<div class="col-sm-4">
-					<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item active">DataTables</li>
-					</ol>
-				</div>
+                    <div class="col-sm-8">
+                        <h1>Bảng Permissions</h1>
+                    </div>
+                    <div class="col-sm-2">
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-success" href="{{route('permissions.create')}}">Tạo permission</a>
+						</div>
+					</div>
+                    <div class="col-sm-2">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">DataTables</li>
+                        </ol>
+                    </div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -29,17 +35,16 @@
 			<div class="col-12">
 				<div class="card-body">
 					<div class="card-header">
-						@include('layouts.errors')
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-					<table id="example1" class="table table-bordered table-dark">
+					<table id="permission-table" class="table table-bordered">
 						<thead>
 							<tr>
                                 <th>No</th>
-                                <th>Name</th>
-                                <th>Guard_name</th>
-                                <th width="280px">Thao tác</th>
+                                <th>NAME</th>
+                                <th>GUARD_NAME</th>
+                                <th width="280px">THAO TÁC</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,9 +66,9 @@
 						<tfoot>
 							<tr>
                                 <th>No</th>
-                                <th>Name</th>
-                                <th>Guard_name</th>
-                                <th>Thao tác</th>
+                                <th>NAME</th>
+                                <th>GUARD_NAME</th>
+                                <th>THAO TÁC</th>
 							</tr>
 						</tfoot>
 					</table>
@@ -99,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-                <button type="submit" class="btn btn-warning" >Lưu cập nhật</button>
+                <button type="submit" class="btn btn-primary" >Lưu cập nhật</button>
                 </div>
             </form>
             </div>
@@ -127,7 +132,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-                <button type="submit" class="btn btn-warning">Xóa ngay</button>
+                <button type="submit" class="btn btn-danger">Xóa ngay</button>
             </div>
             </form>
         </div>
@@ -137,6 +142,22 @@
 @endsection
 @section('script')
     @parent
+    <!-- datatable -->
+    <script>
+		$("#permission-table").DataTable({
+			"responsive": true,
+			"autoWidth": false,
+		});
+    </script>
+    <!-- errors -->
+    <script>
+    @if(count($errors) > 0)
+        @foreach($errors->all() as $error)
+            toastr.error("{{ $error }}");
+        @endforeach
+    @endif
+    </script>
+    <!-- permission modal -->
     <script>
         $('#editPermissionModal').on('show.bs.modal', function(event){
             var token = $("input[name='_token'").val()

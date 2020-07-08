@@ -27,9 +27,9 @@ class RoleController extends Controller
     
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id','ASC')->get();
         return view('roles.index',compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i');
     }
 
     /**
@@ -54,15 +54,28 @@ class RoleController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
-        ]);
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'name' => 'Tên role',
+            'permission' => 'Quyền'
+        ] );
 
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-
+        $notification = array(
+            'message' => 'Tạo Role thành công', 
+            'alert-type' => 'success'
+          );
         return redirect()->route('roles.index')
-                        ->with('success','Role created successfully');
+                        ->with($notification);
     }
 
     /**
@@ -121,10 +134,12 @@ class RoleController extends Controller
 
 
         $role->syncPermissions($request->input('permission'));
-
-
+        $notification = array(
+            'message' => 'Cập nhật thông tin Role thành công', 
+            'alert-type' => 'info'
+          );
         return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+                        ->with($notification);
     }
 
     /**
@@ -137,7 +152,11 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($request->id_role);
         $role->delete();
+        $notification = array(
+            'message' => 'Xóa Role thành công', 
+            'alert-type' => 'warning'
+          );
         return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+                        ->with($notification);
     }
 }
