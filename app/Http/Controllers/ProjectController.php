@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Duan;
 use App\Http\Requests\AddProjectRequest;
-use App\User;
 use Illuminate\Support\Facades\Redirect;
+use App\Duan;
+use App\User;
 
 class ProjectController extends Controller
 {
@@ -54,8 +54,12 @@ class ProjectController extends Controller
         $input['slug'] = $this->bo_dau_vn($request->ten_du_an);
 
         $project = Duan::create($input);
+        $notification = array(
+            'message' => 'Tạo dự án thành công', 
+            'alert-type' => 'success'
+          );
         return redirect()->route('projects.index')
-                        ->with('success', 'Project created successfully');
+                        ->with($notification);
     }
 
     /**
@@ -99,8 +103,12 @@ class ProjectController extends Controller
         $project = Duan::where('slug','LIKE',"{$slug}")->first();
         $input = $request->all();
         $project->update($input);
+        $notification = array(
+            'message' => 'Cập nhật dự án thành công', 
+            'alert-type' => 'info'
+          );
         return redirect()->route('projects.index')
-                        ->with('success', 'Projects updated successfully');
+                        ->with($notification);
     }
 
     /**
@@ -113,8 +121,12 @@ class ProjectController extends Controller
     {
         $project = Duan::where('slug','LIKE',"{$request->slug_project}")->first();
         $project->delete();
+        $notification = array(
+            'message' => 'Xóa dự án thành công', 
+            'alert-type' => 'warning'
+          );
         return redirect()->route('projects.index')
-                        ->with('success','Project deleted successfully');
+                        ->with($notification);
     }
 
     public function bo_dau_vn ($str)

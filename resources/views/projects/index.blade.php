@@ -1,22 +1,28 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Bảng dự án</h1>
-				</div>
-				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('projects.create')}}"> Tạo một Dự án mới</a>
-				</div>
-				<div class="col-sm-4">
-					<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item active">DataTables</li>
-					</ol>
-				</div>
+					<div class="col-sm-8">
+						<h1>Bảng dự án</h1>
+					</div>
+					<div class="col-sm-2">
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-success" href="{{route('projects.create')}}">Tạo Dự án</a>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">DataTables</li>
+						</ol>
+					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -29,11 +35,10 @@
 			<div class="col-12">
 				<div class="card-body">
 					<div class="card-header">
-						@include('layouts.errors')
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-					<table id="example1" class="table table-bordered table-dark">
+					<table id="project-table" class="table table-bordered">
 						<thead>
 							<tr>
 								<th style="width: 10px;">No</th>
@@ -41,7 +46,8 @@
 								<th style="width: 150px;">Quy mô trung bình</th>
 								<th style="width: 150px;">Thời gian bắt đầu</th>
 								<th style="width: 150px;">Thời gian kết thúc</th>
-								<th>Thao tác</th>
+								<th style="width: 150px;">Người tạo dự án</th>
+								<th style="width: 200px;">Thao tác</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -52,10 +58,11 @@
 									<td>{{$project->quymo_tbinh}}</td>
 									<td>{{$project->thoigian_batdau}}</td>
 									<td>{{$project->thoigian_ketthuc}}</td>
+									<td>{{$project->user->hoten}}</td>
 									
 									<td>
-										<a class = "btn btn-info" href="{{route('projects.show', $project->slug)}}">Show</a>
-										<a class="btn btn-primary" href="{{route('projects.edit', $project->slug)}}">Edit</a>
+										<a class = "btn btn-primary" href="{{route('projects.show', $project->slug)}}">Show</a>
+										<a class="btn btn-warning" href="{{route('projects.edit', $project->slug)}}">Edit</a>
 										<button class="btn btn-danger"  data-projectslug="{{$project->slug}}" data-toggle="modal" data-target="#deleteProjectModal">Delete</button>
 									</td>
 								</tr>
@@ -69,6 +76,7 @@
 								<th>Quy mô trung bình</th>
 								<th>Thời gian bắt đầu</th>
 								<th>Thời gian kết thúc</th>
+								<th>Người tạo dự án</th>
 								<th>Thao tác</th>
 							</tr>
 						</tfoot>
@@ -106,7 +114,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-				<button type="submit" class="btn btn-warning">Xóa ngay</button>
+				<button type="submit" class="btn btn-danger">Xóa ngay</button>
 			</div>
 			</form>
 		</div>
@@ -116,7 +124,14 @@
 @endsection
 @section('script')
 	@parent
+	<!-- datatable -->
+	<script>
+		$("#project-table").DataTable({
+			"scrollX": true,
+		});
+	</script>
 
+	<!-- modal project -->
 	<script>
 		$('#deleteProjectModal').on('show.bs.modal', function(event){
 			var button = $(event.relatedTarget)

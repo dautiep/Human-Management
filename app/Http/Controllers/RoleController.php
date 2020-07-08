@@ -125,6 +125,16 @@ class RoleController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'permission' => 'required',
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'name' => 'Tên role',
+            'permission' => 'Quyền'
         ]);
 
 

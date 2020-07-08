@@ -22,6 +22,17 @@
 <!-- Toastr -->
 <script src="{{URL::asset('public/js/toastr.min.js')}}"></script>
 
+<!-- hide errors -->
+<script type="text/javascript">
+    window.setTimeout(function() {
+
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+
+            $(this).remove(); 
+        });
+    }, 10000);
+</script>
+<!-- Toastr config -->
 <script>
     toastr.options = {
     "closeButton": false,

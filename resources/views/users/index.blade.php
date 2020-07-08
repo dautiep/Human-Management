@@ -14,7 +14,7 @@
 					</div>
 					<div class="col-sm-2">
 						<div class="breadcrumb float-sm-right">
-							<a class="btn btn-success" href="{{route('users.create')}}"> Create New User</a>
+							<a class="btn btn-success" href="{{route('users.create')}}">Tạo user</a>
 						</div>
 					</div>
 					<div class="col-sm-2">
@@ -27,15 +27,12 @@
 			</div><!-- /.container-fluid -->
 		</section>
 
-		
-
 		<!-- Main content -->
 		<section class="content">
 		<div class="row">
 			<div class="col-12">
 				<div class="card-body">
 					<div class="card-header">
-						@include('layouts.errors')
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -48,7 +45,7 @@
 									<th style="width: 150px;">HỌ TÊN</th>
 									<th style="width: 100px;">GIỚI TÍNH</th>
 									<th style="width: 50px;">AVATAR</th>
-									<th style="width: 130px;">QUYỀN</th>
+									<th style="width: 130px;">VAI TRÒ</th>
 									<th style="width: 200px;">THAO TÁC</th>
 								</tr>
 							</thead>
@@ -69,8 +66,8 @@
 											@endif 
 										</td>
 										<td>
-											<a class = "btn btn-info" href="{{route('users.show', $user->id)}}">Show</a>
-											<a class="btn btn-primary" data-userid={{$user->id}} data-username="{{$user->username}}"
+											<a class = "btn btn-primary" href="{{route('users.show', $user->id)}}">Show</a>
+											<a class="btn btn-warning" data-userid={{$user->id}} data-username="{{$user->username}}"
 												data-email={{$user->email}} data-hoten="{{$user->hoten}}" 
 												data-gioi_tinh={{$user->gioi_tinh}}
 												data-danhso={{$user->danhso}} data-so_dien_thoai="{{$user->so_dien_thoai}}"
@@ -89,7 +86,7 @@
 									<th>HỌ TÊN</th>
 									<th>GIỚI TÍNH</th>
 									<th>AVATAR</th>
-									<th>QUYỀN</th>
+									<th>VAI TRÒ</th>
 									<th>THAO TÁC</th>
 								</tr>
 							</tfoot>
@@ -169,17 +166,13 @@
 								{!! Form::text('danhso', null, array('placeholder' => 'Danh số','class' => 'form-control', 'id' => 'user_danhso')) !!}
 							</div>
 							<div class="form-group col-md-6">
-								<label>Avatar: </label>
-								<input type="file" class="form-control" name="avatar" id="user_avatar" value="{{old('avatar')}}">
+								<strong>Quyền: </strong>
+								<select id="roles" class="form-control" multiple name="roles[]">
+									@foreach($roles as $role)
+										<option value="{{$role}}">{{$role}}</option>
+									@endforeach
+								</select>  
 							</div>
-						</div>
-						<div class="form-group">
-							<strong>Quyền: </strong>
-							<select id="roles" class="form-control" multiple name="roles[]">
-							@foreach($roles as $role)
-								<option value="{{$role}}">{{$role}}</option>
-							@endforeach
-							</select>  
 						</div>
 						
 						<input type="hidden" name="id_user" id="user_id" value="">

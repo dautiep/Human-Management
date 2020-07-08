@@ -54,7 +54,7 @@
 									<td>{{$p->name}}</td>
 									<td>{{$p->guard_name}}</td>
 									<td>
-                                        <button class="btn btn-primary" data-permissionid={{$p->id}} data-permissionname={{$p->name}}
+                                        <button class="btn btn-warning" data-permissionid={{$p->id}} data-permissionname={{$p->name}}
                                             data-toggle="modal" data-target="#editPermissionModal">Edit
                                         </button>
                                         <button class="btn btn-danger"  data-permissionid={{$p->id}} data-toggle="modal" data-target="#deletePermissionModal">Delete</button>
@@ -151,11 +151,11 @@
     </script>
     <!-- errors -->
     <script>
-    @if(count($errors) > 0)
-        @foreach($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
+        @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
     </script>
     <!-- permission modal -->
     <script>
