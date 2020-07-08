@@ -1,17 +1,23 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-6">
+				<div class="col-sm-8">
 					<h1>Bảng người dùng</h1>
 				</div>
 				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('users.create')}}"> Create New User</a>
+					<div class="breadcrumb float-sm-right">
+						<a class="btn btn-success" href="{{route('users.create')}}"> Create New User</a>
+					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-2">
 					<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="#">Home</a></li>
 					<li class="breadcrumb-item active">DataTables</li>
@@ -33,7 +39,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-					<table id="example1" class="table table-bordered table-dark">
+					<table id="example1" class="table table-bordered">
 						<thead>
 							<tr>
 								<th style="width: 10px;">No</th>
@@ -98,8 +104,8 @@
     </div>
 	<!-- /.content-wrapper -->
 	<!-- Modal Edit -->
-	<div class="modal modal-danger fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+	<div class="modal fade bd-example-modal-lg" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
@@ -109,25 +115,35 @@
 					{{method_field('patch')}}
 					<input type="hidden" name="_token" value="{{csrf_token()}}">
 					<div class="modal-body">
-						<div class="form-group">
-							<label>Tên tài khoản: </label>
-							{!! Form::text('username', null, array('placeholder' => 'Username','class' => 'form-control', 'id' => 'user_username')) !!}
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Tên tài khoản: </label>
+								{!! Form::text('username', null, array('placeholder' => 'Username','class' => 'form-control', 'id' => 'user_username')) !!}
+							</div>
+							<div class="form-group col-md-6">
+								<label>Email: </label>
+								{!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'id' => 'user_email')) !!}
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Email:</label>
-							{!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'id' => 'user_email')) !!}
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Họ tên: </label>
+								{!! Form::text('hoten', null, array('placeholder' => 'Full Name','class' => 'form-control', 'id' => 'user_hoten')) !!}
+							</div>
+							<div class="form-group col-md-6">
+								<label>Số điện thoại: </label>
+								{!! Form::text('so_dien_thoai', null, array('placeholder' => 'Số điện thoại','class' => 'form-control', 'id' => 'user_sodienthoai')) !!}
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Mật khẩu:</label>
-							{!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
-						</div>
-						<div class="form-group">
-							<label>Nhập lại mật khẩu:</label>
-							{!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-						</div>
-						<div class="form-group">
-							<label>Họ tên:</label>
-							{!! Form::text('hoten', null, array('placeholder' => 'Full Name','class' => 'form-control', 'id' => 'user_hoten')) !!}
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Mật khẩu: </label>
+								{!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+							</div>
+							<div class="form-group col-md-6">
+								<label>Nhập lại mật khẩu: </label>
+								{!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+							</div>
 						</div>
 						<div class="form-group">
 							<label>Giới tính:</label>
@@ -144,17 +160,15 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Danh số::</label>
-							{!! Form::text('danhso', null, array('placeholder' => 'Danh số','class' => 'form-control', 'id' => 'user_danhso')) !!}
-						</div>
-						<div class="form-group">
-							<label>Số điện thoại:</label>
-							{!! Form::text('so_dien_thoai', null, array('placeholder' => 'Số điện thoại','class' => 'form-control', 'id' => 'user_sodienthoai')) !!}
-						</div>
-						<div class="form-group">
-							<label>Avatar:</label>
-							<input type="file" class="form-control" name="avatar" id="user_avatar" value="{{old('avatar')}}">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Danh số: </label>
+								{!! Form::text('danhso', null, array('placeholder' => 'Danh số','class' => 'form-control', 'id' => 'user_danhso')) !!}
+							</div>
+							<div class="form-group col-md-6">
+								<label>Avatar: </label>
+								<input type="file" class="form-control" name="avatar" id="user_avatar" value="{{old('avatar')}}">
+							</div>
 						</div>
 						<div class="form-group">
 							<strong>Quyền: </strong>
@@ -169,7 +183,7 @@
 					</div>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-					<button type="submit" class="btn btn-warning" data-target="#myModal">Lưu cập nhật</button>
+					<button type="submit" class="btn btn-primary" data-target="#myModal">Lưu cập nhật</button>
 					</div>
 				</form>
 			</div>
@@ -197,7 +211,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-				<button type="submit" class="btn btn-warning">Xóa ngay</button>
+				<button type="submit" class="btn btn-danger">Xóa ngay</button>
 			</div>
 			</form>
 		</div>

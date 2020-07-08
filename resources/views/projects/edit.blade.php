@@ -103,7 +103,5 @@
                 </div>
             </form>
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 @endsection

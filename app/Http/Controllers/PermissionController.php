@@ -41,20 +41,20 @@ class PermissionController extends Controller
 
     public function update(Request $request)
     {
-        $user = M_Permission::findOrFail($request->id_permission);
+        $permission = M_Permission::findOrFail($request->id_permission);
         $this->validate($request, [
             'name' => 'required|unique:permissions,name'
         ]);
         $input = $request->all();
-        $user->update($input);
+        $permission->update($input);
         return redirect()->route('permissions.index')
                         ->with('success','Permission updated successfully');
     }
 
     public function destroy(Request $request)
     {
-        $user = M_Permission::findOrFail($request->id_permission);
-        $user->delete();
+        $permission = M_Permission::findOrFail($request->id_permission);
+        $permission->delete();
         return redirect()->route('permissions.index')
                         ->with('success','Permssion deleted successfully');
     }

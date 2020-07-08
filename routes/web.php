@@ -26,9 +26,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('home', 'HomeController');
     Route::resource('permissions', 'PermissionController');
     Route::resource('projects', 'ProjectController');
+    Route::resource('positions', 'PositionController');
+    Route::resource('jobs', 'JobController');
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
+    Route::post('update_password', 'HomeController@updatePassword')->name('update-password');
     Route::post('crop_avatar', 'UserController@uploadImage')->name('croppie');
 });
 

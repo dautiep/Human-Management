@@ -17,7 +17,6 @@ class CreateJob extends Migration
             $table->bigIncrements('id');
             $table->string('ma_job', 255);
             $table->string('ten_job', 255);
-            $table->string('capbac_vitri', 255);
             $table->text('li_do_tuyen');
             $table->integer('so_luong_tuyen');
             $table->integer('songay_tieuchuan_vitri');
@@ -31,7 +30,8 @@ class CreateJob extends Migration
             $table->foreign('id_user')->references('id')->on('users');
             $table->unsignedBigInteger('id_duan');
             $table->foreign('id_duan')->references('id')->on('duan');
-
+            $table->unsignedBigInteger('id_chucdanh');
+            $table->foreign('id_chucdanh')->references('id')->on('chucdanh');
             $table->timestamps();
         });
     }

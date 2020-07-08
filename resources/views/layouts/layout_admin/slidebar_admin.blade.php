@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('users.index')}}" class="brand-link">
-      <h4>Humman Management</h4>
+      <h4>Human Management</h4>
     </a>
 
     <!-- Sidebar -->
@@ -64,8 +64,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>Sách</p>
+                <a href="{{route('positions.index')}}" class="nav-link">
+                  <p>Chức danh</p>
                 </a>
               </li>
               <li class="nav-item">

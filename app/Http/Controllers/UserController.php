@@ -98,14 +98,16 @@ class UserController extends Controller
         }
         
 
-
-
         $user = User::create($input);
         $user->assignRole($request->input('roles')); //chon quyen cho user
 
+        $notification = array(
+            'message' => 'User created Successfully', 
+            'alert-type' => 'success'
+          );
 
         return redirect()->route('users.index')
-                        ->with('success','User created successfully'); //xuat thong bao ra ngoai man hinh
+                        ->with($notification); //xuat thong bao ra ngoai man hinh
     }
 
     /**
@@ -193,9 +195,13 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id',$request->id_user)->delete();
         $user->assignRole($request->input('roles'));
 
+        $notification = array(
+            'message' => 'User update Successfully', 
+            'alert-type' => 'success'
+          );
 
         return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+                        ->with($notification);
     }
 
     /**
@@ -208,7 +214,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->id_user);
         $user->delete();
+        $notification = array(
+            'message' => 'User deleted Successfully', 
+            'alert-type' => 'warning'
+          );
         return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+                        ->with($notification);
     }
 }

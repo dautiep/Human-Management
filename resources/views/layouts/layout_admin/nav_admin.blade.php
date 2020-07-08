@@ -9,6 +9,9 @@
         <a href="{{route('projects.index')}}" class="nav-link">DỰ ÁN</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('jobs.index')}}" class="nav-link">CÔNG VIỆC</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
