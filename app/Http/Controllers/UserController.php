@@ -80,6 +80,16 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
+        $phone = substr($input['so_dien_thoai'], 0, 1);
+        if($phone != '0')
+        {
+            $notification = array(
+                'message' => 'Số điện thoại phải bắt đầu bằng số 0', 
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+
+        }
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
         

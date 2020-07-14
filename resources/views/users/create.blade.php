@@ -1,7 +1,7 @@
 @extends('layouts.layout_admin.admin')
 @section('head')
     @parent
-    
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -27,8 +27,6 @@
 			</div><!-- /.container-fluid -->
 		</section>
 
-		
-
 		<!-- Main content -->
 		<section class="content">
             <div class="card-body">
@@ -50,7 +48,7 @@
                                                 <div class="form-group col-md-6">
                                                     <label>Tên tài khoản: </label>
                                                     <input type="text" name="username" class="form-control" value="{{ old('username')}}" placeholder="nhập tên người dùng">
-                                                    @error('username')
+                                                    @error('username')  
                                                         <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                                     @enderror
                                                 </div>
@@ -153,10 +151,5 @@
 		<!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-
-   
-          
-
 @endsection
 

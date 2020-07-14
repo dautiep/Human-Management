@@ -92,6 +92,7 @@
             <div class="modal-header">
                 <h4 class="modal-title text-center" id="myModalLabel">Sửa permission</h4>
             </div>
+            
             <form action="{{ route('permissions.update', 'test') }}" method="post">
                 {{method_field('patch')}}
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

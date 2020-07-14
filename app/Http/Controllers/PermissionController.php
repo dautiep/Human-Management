@@ -40,14 +40,16 @@ class PermissionController extends Controller
             'name' => 'Tên quyền',
         ] );
         $input = $request->all();
+
         $permissions = M_Permission::create($input);
         $notification = array(
             'message' => 'Tạo Permission thành công', 
             'alert-type' => 'success'
-          );
+            );
 
-        return redirect()->route('permissions.index')
+        return redirect()->back()
                         ->with($notification);
+        
     }
 
     public function update(Request $request)

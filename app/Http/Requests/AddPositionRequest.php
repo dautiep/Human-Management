@@ -32,7 +32,9 @@ class AddPositionRequest extends FormRequest
     public function messages()
     {
         return [
+            'ma_chuc_danh.required' => 'Mã chức danh không được bỏ trống!',
             'ma_chuc_danh.unique' => 'Mã chức danh đã tồn tại!',
+            'ten_chuc_danh.required' => 'Tên chức danh không được bỏ trống!',
             'ten_chuc_danh.unique' => 'Tên chức danh đã tồn tại!',
         ];
     }

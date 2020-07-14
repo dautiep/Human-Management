@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign Up Form by Colorlib</title>
+    <!-- boostrap 4 -->
+    <link rel="stylesheet" href="{{URL::asset('public/css/bootstrap.min.css')}}">
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="{{URL::asset('public/colorlib-regform-16/fonts/material-icon/css/material-design-iconic-font.min.css')}}">
@@ -41,12 +43,10 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <div class="form-input">
-                                    <label for="first_name" class="required">Username</label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Tên tài khoản"/>
+                                    <label for="first_name">Username</label>
+                                    <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Tên tài khoản"/>
                                     @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                                 <div class="form-input">
@@ -114,15 +114,6 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-input">
-                                    <label for="chequeno" class="required">Danh so: </label>
-                                        <input type="text" class="form-control @error('danhso') is-invalid @enderror" name="danhso" value="{{ old('danhso') }}" required placeholder="Danh số"/>
-                                        @error('danhso')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
                             </div>
                         </div>
                         <div class="form-submit">
@@ -144,5 +135,5 @@
     <script src="{{URL::asset('public/colorlib-regform-16/vendor/jquery-validation/dist/jquery.validate.min.js')}}"></script>
     <script src="{{URL::asset('public/colorlib-regform-16/vendor/jquery-validation/dist/additional-methods.min.js')}}"></script>
     <script src="{{URL::asset('public/colorlib-regform-16/js/main.js')}}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>
