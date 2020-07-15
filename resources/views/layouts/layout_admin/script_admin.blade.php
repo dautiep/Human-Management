@@ -23,6 +23,11 @@
 <script src="{{URL::asset('public/js/toastr.min.js')}}"></script>
 
 <script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 3000);
     toastr.options = {
     "closeButton": false,
     "debug": false,

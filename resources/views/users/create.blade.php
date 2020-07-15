@@ -43,14 +43,14 @@
                                     <label>Tên tài khoản: </label>
                                     <input type="text" name="username" class="form-control" value="{{ old('username')}}" placeholder="nhập tên người dùng">
                                     @error('username')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Địa chỉ Email: </label>
                                     <input type="text" name="email" class="form-control" value="{{ old('email')}}" placeholder="nhập email">
                                     @error('email')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                             </div>
@@ -59,14 +59,14 @@
                                     <label>Họ tên: </label>
                                     <input type="text" name="hoten" class="form-control" value="{{ old('hoten')}}" placeholder="Nhập họ tên">
                                     @error('hoten')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Số điện thoại: </label>
                                     <input type="text" name="so_dien_thoai" class="form-control" value="{{ old('so_dien_thoai')}}" placeholder="Nhập số điện thoại">
                                     @error('so_dien_thoai')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                                 
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     @error('gioi_tinh')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                             </div>
@@ -96,14 +96,14 @@
                                     <label for="exampleInputPassword1">Mật khẩu: </label>
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                                     @error('password')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputPassword1">Nhập lại mật khẩu: </label>
                                     <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Nhập lại mật khẩu" name="confirm-password">
                                     @error('confirm-password')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert"  style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                     <label>Danh số: </label>
                                     <input type="text" name="danhso" class="form-control" value="{{ old('danhso')}}" placeholder="Nhập danh số">
                                     @error('danhso')
-                                        <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                        <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                     @enderror
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                 <strong>Quyền:</strong>
                                 {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                                 @error('roles')
-                                    <p style="color: red;"><i><b>{{$message}}</b></i></p>
+                                    <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                 @enderror
                             </div>          
                             </div class="form-row">

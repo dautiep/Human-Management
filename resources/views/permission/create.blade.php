@@ -67,4 +67,3 @@
     </div>
 	<!-- /.content-wrapper -->
 @endsection
-@section
