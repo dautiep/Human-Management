@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('projects', 'ProjectController');
     Route::resource('positions', 'PositionController');
     Route::resource('jobs', 'JobController');
+    Route::prefix('ung-vien')->group(function(){
+        Route::get('danh-sach-ung-vien', 'CandidateController@index');
+    });
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
@@ -35,5 +38,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('crop_avatar', 'UserController@uploadImage')->name('croppie');
 });
 
-Route::post('/register', 'HomeController@userRegister')->name('user-register');
-Route::get('/dangki', 'HomeController@getViewUserRegister')->name('user-dangki');
+Route::post('/dangki', 'CandidateController@store')->name('user-register');
+Route::get('/dangki', 'CandidateController@create')->name('candidate-register');
+Route::get('/tuyen-dung','HomeController@index')->name('recruitment');

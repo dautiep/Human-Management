@@ -42,8 +42,12 @@ class PositionController extends Controller
         $validated = $request->validated();
         $input = $request->all();
         $position = Chucdanh::create($input);
-        return redirect()->route('positions.index')
-                        ->with('success', 'Position created successfully');
+        $notification = array(
+            'message' => 'Tạo Chức danh thành công', 
+            'alert-type' => 'success'
+            );
+        return redirect()->route('positions.create')
+                        ->with($notification);
     }
 
     /**
@@ -56,10 +60,30 @@ class PositionController extends Controller
     public function update(Request $request, $id)
     {
         $position = Chucdanh::findOrFail($request->id_position);
+        $this->validate($request, [
+            'ma_chuc_danh' => 'required|unique:chucdanh,ma_chuc_danh,'.$request->id_position,
+            'ten_chuc_danh' => 'required|unique:chucdanh,ten_chuc_danh,'.$request->id_position
+            
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'ma_chuc_danh' => 'Mã chức danh',
+            'ten_chuc_danh' => 'Tên chức danh'
+        ]);
+        
         $input = $request->all();
         $position->update($input);
+        $notification = array(
+            'message' => 'Cập nhật Chức danh thành công', 
+            'alert-type' => 'info'
+            );
         return redirect()->route('positions.index')
-                        ->with('success','Position updated successfully');
+                        ->with($notification);
     }
 
     /**
@@ -72,7 +96,11 @@ class PositionController extends Controller
     {
         $position = Chucdanh::findOrFail($request->id_position);
         $position->delete();
+        $notification = array(
+            'message' => 'Xóa Chức danh thành công', 
+            'alert-type' => 'warning'
+            );
         return redirect()->route('positions.index')
-                        ->with('success','Position deleted successfully');
+                        ->with($notification);
     }
 }

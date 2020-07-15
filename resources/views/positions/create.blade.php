@@ -1,4 +1,8 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -24,40 +28,49 @@
         </section>
 
         <section class="content">
-            <div class="card-header">
-                @include('layouts.errors')
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- left column -->
-                    <div class="col-md-12">
-                        <!-- general form elements -->
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Thông tin chung</h3>
+            <div class="card-body">
+                <div class="card-header">
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <!-- general form elements -->
+                                <div class="card card-success">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Thông tin chung</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form role="form" action="{{route('positions.store')}}" method="POST">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Mã chức danh:</label>
+                                                <input type="text" class="form-control" name="ma_chuc_danh" value="{{ old('ma_chuc_danh')}}" placeholder="Nhập mã chức danh">
+                                                @error('ma_chuc_danh')
+													<p style="color: red;"><i><b>{{$message}}</b></i></p>
+												@enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Tên chức danh:</label>
+                                                <input type="text" class="form-control" name="ten_chuc_danh" value="{{ old('ten_chuc_danh')}}" placeholder="Nhập tên chức danh">
+                                                @error('ten_chuc_danh')
+													<p style="color: red;"><i><b>{{$message}}</b></i></p>
+												@enderror
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+        
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Thêm</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form role="form" action="{{route('positions.store')}}" method="POST">
-                                @csrf
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Mã chức danh:</label>
-                                        <input type="text" class="form-control" name="ma_chuc_danh" value="{{ old('ma_chuc_danh')}}" placeholder="Nhập mã chức danh" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Tên chức danh:</label>
-                                        <input type="text" class="form-control" name="ten_chuc_danh" value="{{ old('ten_chuc_danh')}}" placeholder="Nhập tên chức danh" required>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Thêm</button>
-                                </div>
-                            </form>
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
             </div>

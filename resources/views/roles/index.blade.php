@@ -52,8 +52,8 @@
 											<td>{{ ++$i }}</td>
 											<td>{{ $role->name }}</td>
 											<td>
-												<a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-												<a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+												<a class="btn btn-primary" href="{{ route('roles.show',$role->id) }}">Show</a>
+												<a class="btn btn-warning" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 												<button class="btn btn-danger"  data-roleid={{$role->id}} data-toggle="modal" data-target="#deleteRoleModal">Delete</button>
 											</td>
 										</tr>

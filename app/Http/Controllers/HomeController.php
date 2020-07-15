@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Duan;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateProfileUserRequest;
 
 
 class HomeController extends Controller
@@ -30,20 +30,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home_page.index');
     }
 
     public function userRegister(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'id_duan' => 'require'
-            // 'roles' => 'required'
-        ]);
 
         $input = $request->all(); //khai bao tat ca cac truong trong csdl o user.php fillable
+        $input['danhso'] = 'NULL';
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
         //avatar
@@ -74,27 +68,20 @@ class HomeController extends Controller
         return view('users.profile', compact('profile'));
     }
 
-    public function updateUserProfile(Request $request)
+    public function updateUserProfile(UpdateProfileUserRequest $request)
     {
         $user =User::find(Auth::user()->id);
-        $this->validate($request, [
-            'username' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'password' => 'same:confirm-password',
-        ]);
-
+        $validated = $request->validated(); 
 
         $input = $request->all();
-        if(!empty($input['password'])){ 
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = array_except($input,array('password'));    
-        }
-
         $user->update($input);
+        $notification = array(
+            'message' => 'Cập nhật thông tin thành công', 
+            'alert-type' => 'success'
+          );
 
         return redirect()->route('profile', $user->id)
-                        ->with('success','User updated successfully');
+                        ->with($notification);
     }
 
     public function updatePassword(Request $request)
@@ -117,8 +104,12 @@ class HomeController extends Controller
         ]);
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        $notification = array(
+            'message' => 'Thay đổi mật khẩu thành công', 
+            'alert-type' => 'success'
+          );
    
         return redirect()->route('profile')
-                        ->with('success','Password updated successfully');
+                        ->with($notification);
     }
 }

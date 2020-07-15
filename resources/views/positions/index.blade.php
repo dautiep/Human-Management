@@ -1,22 +1,28 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Bảng chức danh</h1>
-				</div>
-				<div class="col-sm-2">
-					<a class="btn btn-success" href="{{route('positions.create')}}"> Tạo Chức danh mới</a>
-				</div>
-				<div class="col-sm-4">
-					<ol class="breadcrumb float-sm-right">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item active">DataTables</li>
-					</ol>
-				</div>
+					<div class="col-sm-8">
+						<h1>Bảng chức danh</h1>
+					</div>
+					<div class="col-sm-2">
+						<div class="breadcrumb float-sm-right">
+							<a class="btn btn-success" href="{{route('positions.create')}}">Tạo chức danh</a>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">DataTables</li>
+						</ol>
+					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -29,11 +35,10 @@
 			<div class="col-12">
 				<div class="card-body">
 					<div class="card-header">
-						@include('layouts.errors')
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<table id="example1" class="table table-bordered table-dark">
+						<table id="position-table" class="table table-bordered">
 							<thead>
 								<tr>
 									<th style="width: 10px;">No</th>
@@ -49,7 +54,7 @@
 										<td>{{$position->ma_chuc_danh}}</td>
 										<td>{{$position->ten_chuc_danh}}</td>
 										<td>
-											<a class="btn btn-primary" data-positionid={{$position->id}} 
+											<a class="btn btn-warning" data-positionid={{$position->id}} 
 												data-positionma="{{$position->ma_chuc_danh}}"
 												data-positionten="{{$position->ten_chuc_danh}}"
 												data-toggle="modal" data-target="#editPositionModal">Edit
@@ -109,7 +114,7 @@
 					</div>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-					<button type="submit" class="btn btn-warning" data-target="#myModal">Lưu cập nhật</button>
+					<button type="submit" class="btn btn-primary" data-target="#myModal">Lưu cập nhật</button>
 					</div>
 				</form>
 			</div>
@@ -136,7 +141,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
-				<button type="submit" class="btn btn-warning">Xóa ngay</button>
+				<button type="submit" class="btn btn-danger">Xóa ngay</button>
 			</div>
 			</form>
 		</div>
@@ -146,7 +151,24 @@
 @endsection
 @section('script')
 	@parent
+	<!-- datatable -->
+	<script>
+		$("#position-table").DataTable({
+			"responsive": true,
+			"autoWidth": false,
+		});
+	</script>
+	
+	<!-- errors -->
+    <script>
+        @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
 
+	<!-- position modal -->
 	<script>
 		$('#editPositionModal').on('show.bs.modal', function(event){
 			var button = $(event.relatedTarget)
