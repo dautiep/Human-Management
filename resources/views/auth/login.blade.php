@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đăng nhập</title>
-
     
-
     <!-- Font Icon -->
-    <link rel="stylesheet" href="public/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="public/lib/fonts_login/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="public/colorlib-regform-7/css/style.css">
+    <link rel="stylesheet" href="public/css/login/css/style.css">
 
-
-   
 </head>
 <body>
 
@@ -25,7 +21,7 @@
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="public/colorlib-regform-7/images/signin-image.jpg" alt="sing in image"></figure>
+                        <figure><img src="public/images/signin-image.jpg" alt="sing in image"></figure>
                         <a href="{{ route('candidate-register') }}" class="signin-image-link">Bạn chưa có tài khoản người dùng</a>
                     </div>
                     <div class="signup-form">
@@ -37,17 +33,12 @@
                                     <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Tên tài khoản "/>
                                 </div>
-
-                               
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mật khẩu" data-toggle="password">
-                                    
-                                            
-                                       
                                 </div>                                                                                              
                             </div>
 
@@ -76,8 +67,8 @@
     </div>
 
     <!-- JS -->
-    <script src="public/colorlib-regform-7/vendor/jquery/jquery.min.js"></script>
-    <script src="public/colorlib-regform-7/js/main.js"></script>
+    <script src="public/lib/jquery/jquery.min.js"></script>
+    <script src="public/js/login/main.js"></script>
 </body>
 </html>
 

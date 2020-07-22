@@ -19,116 +19,30 @@
         <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline services-head text-center">
-                <h2>Các dự án</h2>
-            </div>
+                <div class="section-headline services-head text-center">
+                    <h2>Các dự án</h2>
+                </div>
             </div>
         </div>
         <div class="row text-center">
             <div class="services-contents">
-            <!-- Start Left services -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-phone"></i>
-                                            </a>
-                    <h4>Expert Coder</h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
+                @foreach($projects as $project)
+                    <!-- Start Left services -->
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="about-move">
+                            <div class="services-details">
+                                <div class="single-services">
+                                    <a class="services-icon" href="#">
+                                        <i class="{{$project->hinh_duan}}"></i>
+                                    </a>
+                                    <h4>{{$project->ten_du_an}}</h4>
+                                    <p><?php echo $project->mota_duan; ?></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-camera-retro"></i>
-                                            </a>
-                    <h4>Creative Designer</h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
-                    </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <!-- end col-md-4 -->
-                <div class=" about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-wordpress"></i>
-                                            </a>
-                    <h4>Wordpress Developer</h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
-                    </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <!-- end col-md-4 -->
-                <div class=" about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-camera-retro"></i>
-                                            </a>
-                    <h4>Social Marketer </h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
-                    </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
-            <!-- End Left services -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <!-- end col-md-4 -->
-                <div class=" about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-bar-chart"></i>
-                                            </a>
-                    <h4>Seo Expart</h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
-                    </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
-            <!-- End Left services -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <!-- end col-md-4 -->
-                <div class=" about-move">
-                <div class="services-details">
-                    <div class="single-services">
-                    <a class="services-icon" href="#">
-                                                <i class="fa fa-ticket"></i>
-                                            </a>
-                    <h4>24/7 Support</h4>
-                    <p>
-                        will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
-                    </p>
-                    </div>
-                </div>
-                <!-- end about-details -->
-                </div>
-            </div>
+                    <!-- end about-details -->
+                @endforeach
             </div>
         </div>
         </div>

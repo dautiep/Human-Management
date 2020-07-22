@@ -55,7 +55,7 @@
                         
                                                 <ul class="list-group list-group-unbordered mb-3">
                                                 <li class="list-group-item">
-                                                    <b>Email: </b> <a class="float-right">{{Auth::user()->email}}</a>
+                                                    <b>Email: </b> <a class="float-right">{{Auth::user()->email_address}}</a>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <b>Số điện thoại: </b> <a class="float-right">{{Auth::user()->so_dien_thoai}}</a>

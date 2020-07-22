@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\About;
 use Illuminate\Http\Request;
 use App\User;
-use App\Duan;
+use App\Slider;
+use App\Duan;   
 use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home_page.index');
+        $projects = Duan::all();
+        $sliders = Slider::all();
+        $about = About::where('id', 1)->first();
+        return view('home_page.index', ['about' => $about, 'sliders' => $sliders,
+                                        'projects' => $projects]);
     }
 
     public function userRegister(Request $request)

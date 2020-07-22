@@ -22,9 +22,10 @@ class CreateDuan extends Migration
             $table->date('thoigian_ketthuc');
             $table->text('mota_duan');
             $table->timestamps();
-
+            
             //foreign key
             $table->unsignedBigInteger('id_user');
+            $table->string('hinh_duan', 255);
             $table->foreign('id_user')->references('id')->on('users');
         });
     }

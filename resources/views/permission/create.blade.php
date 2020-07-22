@@ -1,4 +1,8 @@
 @extends('layouts.layout_admin.admin')
+@section('head')
+	@parent
+	<link rel="stylesheet" href="{{URL::asset('public/css/custom.css')}}">
+@endsection
 @section('content')
     <div class="content-wrapper">
 		<!-- Content Header (Page header) -->

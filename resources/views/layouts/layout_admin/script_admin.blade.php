@@ -20,7 +20,7 @@
 <!--crop image-->
 <script src="{{URL::asset('public/js/croppie.js')}}"></script>
 <!-- Toastr -->
-<script src="{{URL::asset('public/js/toastr.min.js')}}"></script>
+<script src="{{URL::asset('public/lib/toastr/js/toastr.min.js')}}"></script>
 
 <!-- hide errors -->
 <script type="text/javascript">

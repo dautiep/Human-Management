@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/tuyen-dung','HomeController@index')->name('recruitment');
 
-Route::get('/', function(){
-    return view('auth.login');
-});
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function(){
@@ -29,8 +27,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('positions', 'PositionController');
     Route::resource('jobs', 'JobController');
     Route::prefix('ung-vien')->group(function(){
-        Route::get('danh-sach-ung-vien', 'CandidateController@index');
+    Route::get('danh-sach-ung-vien', 'CandidateController@index');
     });
+    
     Route::get('/home', 'UserController@index')->name('Home');
     Route::post('/showUserInRole', 'UserController@showUserInRole');
     Route::post('update_profile', 'HomeController@updateUserProfile')->name('update-profile');
@@ -40,4 +39,3 @@ Route::group(['middleware' => ['auth']], function(){
 
 Route::post('/dangki', 'CandidateController@store')->name('user-register');
 Route::get('/dangki', 'CandidateController@create')->name('candidate-register');
-Route::get('/tuyen-dung','HomeController@index')->name('recruitment');

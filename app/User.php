@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Job', 'id_user', 'id');
     }
 
+    public function project()
+    {
+        return $this->hasMany('App\Duan', 'id_user', 'id');
+    }
+
     
 
     /**

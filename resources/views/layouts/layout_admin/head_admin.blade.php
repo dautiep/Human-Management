@@ -22,6 +22,6 @@
   <!--Crop image-->
   <link rel="stylesheet" href="{{URL::asset('public/css/croppie.css')}}">
   <!-- Toastr -->
-  <link rel="stylesheet" href="{{URL::asset('public/css/toastr.min.css')}}">
+  <link rel="stylesheet" href="{{URL::asset('public/lib/toastr/css/toastr.min.css')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

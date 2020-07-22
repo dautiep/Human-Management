@@ -15,7 +15,8 @@ class Duan extends Model
         'mota_duan',
         'thoigian_batdau',
         'thoigian_ketthuc',
-        'id_user'
+        'id_user',
+        'hinh_duan'
     ];
 
     public function job()

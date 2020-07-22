@@ -122,8 +122,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $role = Role::find($id);
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:roles,name,'.$role->id,
             'permission' => 'required',
         ],
 
@@ -138,7 +139,7 @@ class RoleController extends Controller
         ]);
 
 
-        $role = Role::find($id);
+        
         $role->name = $request->input('name');
         $role->save();
 

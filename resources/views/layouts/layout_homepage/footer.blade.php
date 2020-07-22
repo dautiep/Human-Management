@@ -9,7 +9,7 @@
                   <h2><span>BellSystem</span>24 Hoasao</h2>
                 </div>
 
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <p>Công Ty Cổ Phần Bellsystem24-HoaSao tiền thân là CTCP Tập Đoàn Hoa Sao (gọi tắt là Hoa Sao) là một trong những công ty đầu tiên của Việt Nam cung cấp các giải pháp, dịch vụ chuyên nghiệp về Contact Center và BPO (Business Process Outsourcing).</p>
                 <div class="footer-icons">
                   <ul>
                     <li>

@@ -47,15 +47,15 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label>Tên tài khoản: </label>
-                                                    <input type="text" name="username" class="form-control" value="{{ old('username')}}" placeholder="nhập tên người dùng">
+                                                    <input type="text" name="username" class="form-control" value="{{ old('username')}}" placeholder="Nhập tên người dùng">
                                                     @error('username')  
                                                         <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Địa chỉ Email: </label>
-                                                    <input type="text" name="email" class="form-control" value="{{ old('email')}}" placeholder="nhập email">
-                                                    @error('email')
+                                                    <input type="text" name="email_address" class="form-control" value="{{ old('email_address')}}" placeholder="Nhập email">
+                                                    @error('email_address')
                                                         <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                                     @enderror
                                                 </div>

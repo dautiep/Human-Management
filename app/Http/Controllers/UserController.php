@@ -92,8 +92,6 @@ class UserController extends Controller
         }
         $input['password'] = Hash::make($input['password']); //ma hoa password
 
-        
-        
         if($request->gioi_tinh == 1)
         {
             $file_name = 'avatar_male.png';
@@ -169,7 +167,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->id_user);
         $this->validate($request, [
             'username' => 'required',
-            'email' => 'required|email|unique:users,email,'.$request->id_user,
+            'email_address' => 'required|email|unique:users,email_address,'.$request->id_user,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);

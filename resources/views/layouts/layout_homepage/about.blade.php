@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="section-headline text-center">
-            <h2>About eBusiness</h2>
+            <h2>Về chúng tôi</h2>
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
           <div class="well-left">
             <div class="single-well">
               <a href="#">
-								  <img src="{{URL::asset('public/images/hoasao/hoasao.webp')}}" alt="">
+								  <img src="{{URL::asset('public/images/hoasao/hoasao_about.webp')}}" alt="">
 								</a>
             </div>
           </div>
@@ -23,27 +23,24 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="well-middle">
             <div class="single-well">
-              <a href="#">
-                <h4 class="sec-head">project Maintenance</h4>
-              </a>
-              <p>
-                Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
-              </p>
+              <h4 class="sec-head">Giới thiệu tổng quan</h4>
+              <p><?php echo $about->tong_quan ?></p>
+            </div>
+            <br>
+            <div class="single-well">
+              <h4 class="sec-head">Tầm nhìn</h4>
               <ul>
                 <li>
-                  <i class="fa fa-check"></i> Interior design Package
+                  <?php echo $about->tam_nhin; ?>
                 </li>
+              </ul>
+            </div>
+            <br>
+            <div class="single-well">
+              <h4 class="sec-head">Sứ mệnh</h4>
+              <ul>
                 <li>
-                  <i class="fa fa-check"></i> Building House
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Reparing of Residentail Roof
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Renovaion of Commercial Office
-                </li>
-                <li>
-                  <i class="fa fa-check"></i> Make Quality Products
+                  <?php echo $about->su_menh; ?>
                 </li>
               </ul>
             </div>
