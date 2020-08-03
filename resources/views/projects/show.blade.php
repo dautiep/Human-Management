@@ -21,8 +21,6 @@
                             <div class="title_left">
                                 <h3>Chi tiết dự án</h3>
                             </div>
-    
-                        
                         </div>
                         
                         <div class="clearfix"></div>
@@ -65,10 +63,6 @@
                                 <br />
     
                                 <div id="mainb" style="height:350px;"></div>
-    
-                                
-    
-    
                                 </div>
     
                                 <!-- start project-detail sidebar -->
@@ -91,9 +85,9 @@
                                             <p class="title">Thời gian dự kiến</p>
                                             <p>2 năm</p>
                                             <p class="title">Thời gian bắt đầu</p>
-                                            <p>{{date_format(date_create("$project->thoigian_batdau"),"d/m/Y")}}</p>
+                                            <p>{{date_format(date_create("$project->thoigian_batdau"),"d-m-Y")}}</p>
                                             <p class="title">Thời gian kết thúc</p>
-                                            <p>{{date_format(date_create("$project->thoigian_ketthuc"),"d/m/Y")}}</p>
+                                            <p>{{date_format(date_create("$project->thoigian_ketthuc"),"d-m-Y")}}</p>
                                         </div>
     
                                         <br />

@@ -56,8 +56,8 @@
 									<td>{{++$i}}</td>
 									<td>{{$project->ten_du_an}}</td>
 									<td>{{$project->quymo_tbinh}}</td>
-									<td>{{$project->thoigian_batdau}}</td>
-									<td>{{$project->thoigian_ketthuc}}</td>
+									<td>{{date_format(date_create($project->thoigian_batdau), "d-m-Y")}}</td>
+									<td>{{date_format(date_create($project->thoigian_ketthuc), "d-m-Y")}}</td>
 									<td>{{$project->user->hoten}}</td>
 									
 									<td>

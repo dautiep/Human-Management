@@ -55,7 +55,7 @@
                         
                                                 <ul class="list-group list-group-unbordered mb-3">
                                                 <li class="list-group-item">
-                                                    <b>Email: </b> <a class="float-right">{{Auth::user()->email_address}}</a>
+                                                    <b>Email: </b> <a class="float-right">{{Auth::user()->email}}</a>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <b>Số điện thoại: </b> <a class="float-right">{{Auth::user()->so_dien_thoai}}</a>
@@ -82,7 +82,7 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link {{($errors->has('username') > 0 || 
                                                             $errors->has('hoten') > 0 || count($errors) == 0 || 
-                                                            $errors->has('email_address') > 0 || $errors->has('so_dien_thoai') > 0 || 
+                                                            $errors->has('email') > 0 || $errors->has('so_dien_thoai') > 0 || 
                                                             $errors->has('danhso') > 0) ? 'active' : ''}}" href="#profile" data-toggle="tab">Chỉnh sửa thông tin người dùng
                                                         </a>
                                                     </li>
@@ -127,7 +127,7 @@
                                                             <div class="form-group row">
                                                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
                                                                 <div class="col-sm-4">
-                                                                    <input type="email" class="form-control" name="email_address" placeholder="Email" value="{{Auth::user()->email_address}}">
+                                                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{Auth::user()->email}}">
                                                                 </div>
                                                                 <label for="inputEmail" class="col-sm-2 col-form-label">Số điện thoại:</label>
                                                                 <div class="col-sm-4">

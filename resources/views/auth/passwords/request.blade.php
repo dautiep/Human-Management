@@ -57,9 +57,6 @@
         <p class="mt-3 mb-1">
             <a href="{{route('login')}}">Đăng nhập</a>
         </p>
-        <p class="mb-0">
-            <a href="{{route('user-dangki')}}" class="text-center">Đăng kí người dùng</a>
-        </p>
     </div>
     <!-- /.login-card-body -->
   </div>

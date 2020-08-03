@@ -49,7 +49,7 @@
 												<label for="exampleName">Tên Permissions:</label>
 												<input type="text" class="form-control" id="name" placeholder="Nhập tên quyền" name="name" value="{{old('name')}}">
 												@error('name')
-													<p style="color: red;"><i><b>{{$message}}</b></i></p>
+													<p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
 												@enderror
 											</div>
 											<div class="form-group">

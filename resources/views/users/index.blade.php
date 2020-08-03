@@ -54,7 +54,7 @@
 									<tr>
 										<td>{{++$i}}</td>
 										<td>{{$user->username}}</td>
-										<td>{{$user->email_address}}</td>
+										<td>{{$user->email}}</td>
 										<td>{{$user->hoten}}</td>
 										<td>{{($user->gioi_tinh == 1)? 'Nam':'Nữ'}}</td>
 										<td><img width="80px" class="img-circle" src="{{URL::asset('upload/avatar/'.$user->avatar)}}" alt="{{$user->avatar}}" ></td>

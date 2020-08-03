@@ -21,12 +21,14 @@
 <script src="{{URL::asset('public/js/croppie.js')}}"></script>
 <!-- Toastr -->
 <script src="{{URL::asset('public/lib/toastr/js/toastr.min.js')}}"></script>
+<!-- DataPicker -->
+<script src="{{URL::asset('public/lib/datapicker/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 
 <!-- hide errors -->
 <script type="text/javascript">
     window.setTimeout(function() {
 
-        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(".alert-err").fadeTo(500, 0).slideUp(500, function(){
 
             $(this).remove(); 
         });
@@ -38,7 +40,7 @@
         $(".alert").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove(); 
         });
-    }, 3000);
+    }, 5000);
     toastr.options = {
     "closeButton": false,
     "debug": false,

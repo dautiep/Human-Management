@@ -29,7 +29,7 @@ class AddUserRequest extends FormRequest
             'email_address' => 'required|email|unique:users,email_address',
             'hoten' => 'required',
             'gioi_tinh' => 'required',
-            'so_dien_thoai' => 'required|numeric|min:10',
+            'so_dien_thoai' => 'required|numeric|max:10',
             'danhso' => 'required',
             'roles' => 'required'
         ];
@@ -50,7 +50,7 @@ class AddUserRequest extends FormRequest
             'gioi_tinh.required' => 'Vui lòng chọn giới tính!',
             'so_dien_thoai.required' => 'Vui lòng nhập số điện thoại!',
             'so_dien_thoai.numeric' => 'Số điện thoại phải là dạng số!',
-            'so_dien_thoai.min' => 'Số điện thoại tối đa là 10 số!',
+            'so_dien_thoai.max' => 'Số điện thoại tối đa là 10 số!',
             'danhso.required' => 'Vui lòng nhập danh số người dùng!',
             'roles.required' => 'Vui lòng chọn quyền cho người dùng!'
         ];

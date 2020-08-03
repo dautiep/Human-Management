@@ -10,7 +10,7 @@
 						<h1>Thông tin chi tiết role</h1>
 					</div>
 					<div class="col-sm-2">
-						<a class="btn btn-success" href="{{route('roles.index')}}"> Back</a>
+						<a class="btn btn-success" href="{{route('roles.index')}}">Trở về</a>
 					</div>
 					<div class="col-sm-4">
 						<ol class="breadcrumb float-sm-right">

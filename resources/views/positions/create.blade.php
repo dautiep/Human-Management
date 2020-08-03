@@ -50,14 +50,14 @@
                                                 <label for="exampleInputEmail1">Mã chức danh:</label>
                                                 <input type="text" class="form-control" name="ma_chuc_danh" value="{{ old('ma_chuc_danh')}}" placeholder="Nhập mã chức danh">
                                                 @error('ma_chuc_danh')
-													<p style="color: red;"><i><b>{{$message}}</b></i></p>
+													<p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
 												@enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Tên chức danh:</label>
                                                 <input type="text" class="form-control" name="ten_chuc_danh" value="{{ old('ten_chuc_danh')}}" placeholder="Nhập tên chức danh">
                                                 @error('ten_chuc_danh')
-													<p style="color: red;"><i><b>{{$message}}</b></i></p>
+													<p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
 												@enderror
                                             </div>
                                         </div>

@@ -107,14 +107,14 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="inputSpentBudget">Thời gian bắt đầu</label>
-                                                        <input type="date" id="inputSpentBudget" name="thoigian_batdau" class="form-control" value="{{$project->thoigian_batdau}}">
+                                                        <input  data-provide="datepicker" id="thoigian_batdau" name="thoigian_batdau" class="form-control" value="{{date_format(date_create($project->thoigian_batdau), "d-m-Y")}}">
                                                         @error('thoigian_batdau')
                                                             <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="inputEstimatedDuration">Thời gian kết thúc</label>
-                                                        <input type="date" id="inputEstimatedDuration" name="thoigian_ketthuc" class="form-control" value="{{$project->thoigian_ketthuc}}">
+                                                        <input  data-provide="datepicker" id="thoigian_ketthuc" name="thoigian_ketthuc" class="form-control" value="{{date_format(date_create($project->thoigian_ketthuc), "d-m-Y")}}">
                                                         @error('thoigian_ketthuc')
                                                             <p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
                                                         @enderror
@@ -137,3 +137,31 @@
         </section>
     </div>
 @endsection
+@section('script')
+    @parent
+    <script type="text/javascript">
+        $('#thoigian_batdau').datepicker({
+            format:"dd-mm-yyyy",
+            minDate:0,
+            startDate:'+0d',
+            todayBtn:"linked",
+            todayHighlight: true,
+            orientation:"bottom auto",
+            autoclose: true,
+            daysOfWeekDisabled:[0],
+            
+        });
+
+        $('#thoigian_ketthuc').datepicker({
+            format:"dd-mm-yyyy",
+            minDate:0,
+            startDate:'+0d',
+            todayBtn:"linked",
+            todayHighlight: true,
+            orientation:"bottom auto",
+            autoclose: true,
+            daysOfWeekDisabled:[0],
+            
+        });
+    </script>
+@endsection()

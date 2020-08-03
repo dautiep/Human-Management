@@ -2,19 +2,18 @@
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper" style="margin-top: 50px;">
+	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-		@include('layouts.errors')
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-8">
 					<h1>Thông tin chi tiết người dùng</h1>
 				</div>
 				<div class="col-sm-2">
-                    <div class="breadcrumb float-sm-right">
-                        <a href="{{route('users.index')}}" class="btn btn-primary">Trở về</a>
-                    </div>
+					<div class="breadcrumb float-sm-right">
+						<a href="{{route('users.index')}}" class="btn btn-primary">Trở về</a>
+					</div>
                 </div>
 				<div class="col-sm-2">
 					<ol class="breadcrumb float-sm-right">
@@ -41,7 +40,7 @@
 							</div>
 							<div class="form-group col-md-6">
                                 <label for="inputPassword4">Email:</label>
-                                <input type="text" class="form-control" value="{{$user->email}}" readonly>
+                                <input type="text" class="form-control" value="{{$user->email_address}}" readonly>
                             </div>
                         </div>
                         <div class="form-row">

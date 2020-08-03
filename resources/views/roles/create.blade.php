@@ -49,7 +49,7 @@
 														<strong>Tên role:</strong>
 														{!! Form::text('name', null, array('placeholder' => 'Nhập tên role','class' => 'form-control')) !!}
 														@error('name')
-															<p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
+															<p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
 														@enderror
 													</div>
 												</div>
@@ -63,7 +63,7 @@
 														<br/>
 														@endforeach
 														@error('permission')
-															<p class="alert" style="color: red;"><i><b>{{$message}}</b></i></p>
+															<p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
 														@enderror
 													</div>
 												</div>

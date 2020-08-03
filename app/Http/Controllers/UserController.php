@@ -167,7 +167,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->id_user);
         $this->validate($request, [
             'username' => 'required',
-            'email_address' => 'required|email|unique:users,email_address,'.$request->id_user,
+            'email' => 'required|email|unique:users,email,'.$request->id_user,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);

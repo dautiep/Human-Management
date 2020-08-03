@@ -28,7 +28,7 @@ class UpdateProfileUserRequest extends FormRequest
         $user = User::find(Auth::user()->id);
         return [
             'username' => 'required|unique:users,username,'.$user->id,
-            'email_address' => 'required|email|unique:users,email_address,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'hoten' => 'required',
             'so_dien_thoai' => 'required|unique:users,so_dien_thoai,'.$user->id,
             'danhso' => 'required|unique:users,danhso,'.$user->id,
@@ -40,9 +40,9 @@ class UpdateProfileUserRequest extends FormRequest
         return [
             'username.required' => 'Vui lòng nhập tên tài khoản người dùng!',
             'username.unique' => 'Tên người dùng đã được sử dụng!',
-            'email_address.required' => 'Vui lòng nhập địa chỉ email người dùng!',
-            'email_address.email' => 'Địa chỉ email không hợp lệ!',
-            'email._addressunique' => 'Địa chỉ mail này đã có người sử dụng!',
+            'email.required' => 'Vui lòng nhập địa chỉ email người dùng!',
+            'email.email' => 'Địa chỉ email không hợp lệ!',
+            'email..unique' => 'Địa chỉ mail này đã có người sử dụng!',
             'hoten.required' => 'Vui lòng nhập họ tên người dùng!',
             'so_dien_thoai.required' => 'Vui lòng nhập số điện thoại!',
             'danhso.required' => 'Vui lòng nhập danh số người dùng!',
