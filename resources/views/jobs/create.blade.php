@@ -73,6 +73,13 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="inputDescription">Mô tả job</label>
+                                                    <textarea id="inputDescription" class="form-control" name="mo_ta_job" rows="5" placeholder="Nhập mô tả công việc"></textarea>
+                                                    @error('mo_ta_job')
+                                                        <p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Số lượng tuyển</label>
                                                     <input type="number" name="so_luong_tuyen" class="form-control" placeholder="Nhập số lượng ứng viên" value="{{old('so_luong_tuyen')}}">
                                                     @error('so_luong_tuyen')

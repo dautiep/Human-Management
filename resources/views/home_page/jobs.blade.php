@@ -12,42 +12,52 @@
 
     @include('layouts.layout_homepage.slider')
 
-    @include('layouts.layout_homepage.about')
-
-    <!-- Start Service area -->
-    <div id="services" class="services-area area-padding">
-        <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="section-headline services-head text-center">
-                    <h2>Các dự án</h2>
+    <!-- Start Blog Area -->
+    <div id="blog" class="blog-area">
+        <div class="blog-inner area-padding">
+            <div class="blog-overly"></div>
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="section-headline text-center">
+                        <h2>Danh sách công việc</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach($jobs as $job)
+                    <!-- Start Left Blog -->
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="single-blog">
+                            <div class="single-blog-img">
+                                <a href="blog.html">
+                                    <img src="{{URL::asset('public/images/hoasao/'.$job->hinh)}}" alt="">
+                                </a>
+                            </div>
+                            <div class="blog-meta">
+                                <span class="date-type">
+                                    <i class="fa fa-calendar"></i>Ngày tạo: {{$job->created_at}}
+                                </span>
+                            </div>
+                            <div class="blog-text">
+                                <h4>
+                                    <a href="blog.html">{{$job->ten_job}}</a>
+                                </h4>
+                                <p>{{$job->mo_ta_job}}</p>
+                            </div>
+                            <span>
+                                <a href="{{route('detail-job', $job->ma_job)}}" class="ready-btn">Chi tiết</a>
+                            </span>
+                        </div>
+                        <!-- Start single blog -->
+                    </div>
+                    <!-- End Left Blog-->
+                    @endforeach
                 </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="services-contents">
-                @foreach($projects as $project)
-                    <!-- Start Left services -->
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="about-move">
-                            <div class="services-details">
-                                <div class="single-services">
-                                    <a class="services-icon" href="{{route('jobs', $project->slug)}}">
-                                        <i class="{{$project->hinh_duan}}"></i>
-                                    </a>
-                                    <h4>{{$project->ten_du_an}}</h4>
-                                    <p><?php echo $project->mota_duan; ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end about-details -->
-                @endforeach
-            </div>
-        </div>
-        </div>
     </div>
-    <!-- End Service area -->
+    <!-- End Blog -->
 
     @section('script')
     @parent

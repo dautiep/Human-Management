@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/tuyen-dung','HomeController@index')->name('recruitment');
-
+Route::prefix('tuyen-dung')->group(function(){
+    Route::get('','HomeController@index')->name('recruitment');
+    Route::get('{slug}/danh-sach-cong-viec', 'HomeController@showJobsInProject')->name('jobs');
+    Route::get('{ma_job}/chi-tiet-cong-viec', 'HomeController@showDetailJob')->name('detail-job');
+});
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function(){
@@ -26,8 +29,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('projects', 'ProjectController');
     Route::resource('positions', 'PositionController');
     Route::resource('jobs', 'JobController');
+    Route::resource('detail-jobs', 'DetailJobController');
+    Route::resource('education-levels', 'EducationLevelController');
+    Route::resource('sources-job', 'SourceJobController');
+    Route::resource('interview-status', 'InterviewStatusController');
+    Route::resource('interview-result', 'InterviewResultController');
+
     Route::prefix('ung-vien')->group(function(){
-    Route::get('danh-sach-ung-vien', 'CandidateController@index');
+        Route::get('danh-sach-ung-vien', 'CandidateController@index');
     });
     
     Route::get('/home', 'UserController@index')->name('Home');

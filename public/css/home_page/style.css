@@ -501,6 +501,27 @@ div#preloader {
   color: #444;
 }
 
+.apply-btn {
+  border: 1px solid black;
+  border-radius: 30px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.4s ease 0s;
+}
+
+.apply-btn:hover {
+  border: 1px solid #3EC1D5;
+  color: #fff;
+  background: #3EC1D5;
+}
+
 /*--------------------------------*/
 
 /* 4.Services Area

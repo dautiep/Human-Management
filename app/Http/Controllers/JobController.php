@@ -51,13 +51,13 @@ class JobController extends Controller
     {
         $validated = $request->validated();
         $input = $request->all();
+        $input['hinh'] = 'hoasao_job.jpg';
         $jobs = Job::where('id_duan',$request->id_duan)->get();
         foreach($jobs as $job)
         {
             
             if($request->ten_job == $job->ten_job)
             {
-                echo 'hello';
                 $notification = array(
                     'message' => 'Tên công việc đã tồn tại trong dự án!',
                     'alert-type' => 'error'
@@ -257,8 +257,9 @@ class JobController extends Controller
      */
     public function destroy(Request $request)
     {
-        $project = Job::where('ma_job', 'LIKE', "{$request->ma_job}")->first();
-        $project->delete();
+        $job = Job::where('ma_job', 'LIKE', "{$request->ma_job}")->first();
+        $job->detail_job->delete();
+        $job->delete();
         $notification = array(
             'message' => 'Xóa công việc thành công',
             'alert-type' => 'warning'

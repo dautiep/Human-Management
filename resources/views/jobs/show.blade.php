@@ -107,6 +107,8 @@
                             <p class="text-sm">{{$job->ma_job}}</p>
                             <h5>Lý do tuyển:</h5>
                             <p class="text-sm">{{$job->li_do_tuyen}}</p>
+                            <h5>Mô tả job:</h5>
+                            <p class="text-sm">{{$job->mo_ta_job}}</p>
                             <h5>Số lượng tuyển:</h5>
                             <p class="text-sm">{{$job->so_luong_tuyen}} người</p>
                             <h5>Vị trí tuyển dụng:</h5>

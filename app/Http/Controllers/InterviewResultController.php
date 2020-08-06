@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Ketquaphongvan;
 use Illuminate\Http\Request;
-use App\Chucdanh;
-use App\Http\Requests\AddPositionRequest;
 
-class PositionController extends Controller
+class InterviewResultController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $positions = Chucdanh::orderBy('id', 'ASC')->get();
-        return view('positions.index', ['positions' => $positions])
+        $results = Ketquaphongvan::orderBy('id', 'ASC')->get();
+        return view('interview_result.index', ['results' => $results])
             ->with('i');
     }
 
@@ -28,7 +27,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('positions.create');
+        return view('interview_result.create');
     }
 
     /**
@@ -37,18 +36,30 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddPositionRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
+        $this->validate($request, [
+            'ten_ketqua_phongvan' => 'required|unique:ketquaphongvan,ten_ketqua_phongvan,'
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'ten_ketqua_phongvan' => 'Tên kết quả phỏng vấn',
+        ]);
         $input = $request->all();
-        $position = Chucdanh::create($input);
+        $result = Ketquaphongvan::create($input);
         $notification = array(
-            'message' => 'Tạo Chức danh thành công', 
+            'message' => 'Tạo trạng thái kết quả thành công',
             'alert-type' => 'success'
-            );
-        return redirect()->route('positions.create')
+        );
+        return redirect()->route('interview-result.index')
                         ->with($notification);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -59,11 +70,9 @@ class PositionController extends Controller
      */
     public function update(Request $request)
     {
-        $position = Chucdanh::findOrFail($request->id_position);
+        $status = Ketquaphongvan::findOrFail($request->id_result);
         $this->validate($request, [
-            'ma_chuc_danh' => 'required|unique:chucdanh,ma_chuc_danh,'.$request->id_position,
-            'ten_chuc_danh' => 'required|unique:chucdanh,ten_chuc_danh,'.$request->id_position
-            
+            'ten_ketqua_phongvan' => 'required|unique:ketquaphongvan,ten_ketqua_phongvan,'.$request->id_result,
         ],
 
         [
@@ -72,17 +81,15 @@ class PositionController extends Controller
         ],
 
         [
-            'ma_chuc_danh' => 'Mã chức danh',
-            'ten_chuc_danh' => 'Tên chức danh'
+            'ten_ketqua_phongvan' => 'Tên trạng thái kết quả phỏng vấn',
         ]);
-        
         $input = $request->all();
-        $position->update($input);
+        $status->update($input);
         $notification = array(
-            'message' => 'Cập nhật Chức danh thành công', 
+            'message' => 'Cập nhật trạng thái kết quả thành công', 
             'alert-type' => 'info'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('interview-result.index')
                         ->with($notification);
     }
 
@@ -94,13 +101,13 @@ class PositionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $position = Chucdanh::findOrFail($request->id_position);
-        $position->delete();
+        $result = Ketquaphongvan::findOrFail($request->id_result);
+        $result->delete();
         $notification = array(
-            'message' => 'Xóa Chức danh thành công', 
+            'message' => 'Xóa trạng thái kết quả thành công', 
             'alert-type' => 'warning'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('interview-result.index')
                         ->with($notification);
     }
 }

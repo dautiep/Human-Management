@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Trinhdovanhoa;
 use Illuminate\Http\Request;
-use App\Chucdanh;
-use App\Http\Requests\AddPositionRequest;
 
-class PositionController extends Controller
+class EducationLevelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $positions = Chucdanh::orderBy('id', 'ASC')->get();
-        return view('positions.index', ['positions' => $positions])
+        $levels = Trinhdovanhoa::orderBy('id', 'ASC')->get();
+        return view('education_levels.index', ['levels' => $levels])
             ->with('i');
     }
 
@@ -28,7 +27,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('positions.create');
+        return view('education_levels.create');
     }
 
     /**
@@ -37,33 +36,10 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddPositionRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        $input = $request->all();
-        $position = Chucdanh::create($input);
-        $notification = array(
-            'message' => 'Tạo Chức danh thành công', 
-            'alert-type' => 'success'
-            );
-        return redirect()->route('positions.create')
-                        ->with($notification);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $position = Chucdanh::findOrFail($request->id_position);
         $this->validate($request, [
-            'ma_chuc_danh' => 'required|unique:chucdanh,ma_chuc_danh,'.$request->id_position,
-            'ten_chuc_danh' => 'required|unique:chucdanh,ten_chuc_danh,'.$request->id_position
-            
+            'ten_trinhdovanhoa' => 'required|unique:trinhdovanhoa,ten_trinhdovanhoa,'
         ],
 
         [
@@ -72,17 +48,49 @@ class PositionController extends Controller
         ],
 
         [
-            'ma_chuc_danh' => 'Mã chức danh',
-            'ten_chuc_danh' => 'Tên chức danh'
+            'ten_trinhdovanhoa' => 'Tên trình độ văn hóa',
         ]);
-        
         $input = $request->all();
-        $position->update($input);
+        $level = Trinhdovanhoa::create($input);
         $notification = array(
-            'message' => 'Cập nhật Chức danh thành công', 
+            'message' => 'Tạo trình độ văn hóa thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('education-levels.index')
+                        ->with($notification);
+    }
+
+
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $level = Trinhdovanhoa::findOrFail($request->id_level);
+        $this->validate($request, [
+            'ten_trinhdovanhoa' => 'required|unique:trinhdovanhoa,ten_trinhdovanhoa,'.$request->id_level,
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'ten_trinhdovanhoa' => 'Tên trình độ văn hóa',
+        ]);
+        $input = $request->all();
+        $level->update($input);
+        $notification = array(
+            'message' => 'Cập nhật Trình độ văn hóa thành công', 
             'alert-type' => 'info'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('education-levels.index')
                         ->with($notification);
     }
 
@@ -94,13 +102,13 @@ class PositionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $position = Chucdanh::findOrFail($request->id_position);
-        $position->delete();
+        $level = Trinhdovanhoa::findOrFail($request->id_level);
+        $level->delete();
         $notification = array(
-            'message' => 'Xóa Chức danh thành công', 
+            'message' => 'Xóa Trình độ văn hóa thành công', 
             'alert-type' => 'warning'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('education-levels.index')
                         ->with($notification);
     }
 }

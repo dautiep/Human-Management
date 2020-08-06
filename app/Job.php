@@ -20,7 +20,9 @@ class Job extends Model
         'id_user',
         'id_duan',
         'id_chucdanh',
-        'trang_thai'
+        'trang_thai',
+        'hinh',
+        'mo_ta_job'
     ];
 
     public function duan()
@@ -41,5 +43,10 @@ class Job extends Model
     public function ungvien()
     {
         return $this->hasMany('App\Ungvien', 'id_job', 'id');
+    }
+
+    public function detail_job()
+    {
+        return $this->hasMany('App\Detail_job', 'id_job', 'id');
     }
 }

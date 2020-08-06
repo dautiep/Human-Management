@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\About;
 use Illuminate\Http\Request;
+use App\About;
+use App\Detail_job;
 use App\User;
 use App\Slider;
-use App\Duan;   
+use App\Duan;
+use App\Job;   
 use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +39,25 @@ class HomeController extends Controller
         $about = About::where('id', 1)->first();
         return view('home_page.index', ['about' => $about, 'sliders' => $sliders,
                                         'projects' => $projects]);
+    }
+
+    public function showJobsInProject($slug)
+    {
+        $sliders = Slider::all();
+        $project = Duan::where('slug', 'LIKE', "{$slug}")->first();
+        $jobs = Job::where('id_duan', $project->id)->get();
+        return view('home_page.jobs', ['sliders' => $sliders, 'project' => $project, 
+                                        'jobs' => $jobs]);
+        
+    }
+
+    public function showDetailJob($ma_job)
+    {
+        $sliders = Slider::all();
+        $job = Job::where('ma_job', 'LIKE', "{$ma_job}")->first();
+        $detail_job = Detail_job::where('id_job', $job->id)->first();
+        return view('home_page.detail_job', ['sliders' => $sliders, 'job' => $job,
+                                            'detail_job' => $detail_job]);
     }
 
     public function userRegister(Request $request)

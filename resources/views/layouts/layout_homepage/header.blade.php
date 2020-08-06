@@ -29,7 +29,7 @@
               <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
                 <ul class="nav navbar-nav navbar-left">
                   <li class="active">
-                    <a  class="page-scroll" href="#home"><b>Trang chủ</b></a>
+                    <a  class="page-scroll" href="{{route('recruitment')}}"><b>Trang chủ</b></a>
                   </li>
                   <li>
                     <a  class="page-scroll" href="#about"><b>Về chúng tôi</b></a>

@@ -23,6 +23,8 @@ class CreateJob extends Migration
             $table->date('thoigian_offer');
             $table->date('thoigian_den_onboard');
             $table->tinyInteger('trang_thai');
+            $table->string('hinh', 255)->nullable();
+            $table->text('mo_ta_job')->nullable();
             
 
             //foreign key

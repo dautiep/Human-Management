@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Nguonjob;
 use Illuminate\Http\Request;
-use App\Chucdanh;
-use App\Http\Requests\AddPositionRequest;
 
-class PositionController extends Controller
+class SourceJobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $positions = Chucdanh::orderBy('id', 'ASC')->get();
-        return view('positions.index', ['positions' => $positions])
+        $sources = Nguonjob::orderBy('id', 'ASC')->get();
+        return view('source_job.index', ['sources' => $sources])
             ->with('i');
     }
 
@@ -28,7 +27,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('positions.create');
+        return view('source_job.create');
     }
 
     /**
@@ -37,33 +36,10 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddPositionRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        $input = $request->all();
-        $position = Chucdanh::create($input);
-        $notification = array(
-            'message' => 'Tạo Chức danh thành công', 
-            'alert-type' => 'success'
-            );
-        return redirect()->route('positions.create')
-                        ->with($notification);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $position = Chucdanh::findOrFail($request->id_position);
         $this->validate($request, [
-            'ma_chuc_danh' => 'required|unique:chucdanh,ma_chuc_danh,'.$request->id_position,
-            'ten_chuc_danh' => 'required|unique:chucdanh,ten_chuc_danh,'.$request->id_position
-            
+            'ten_nguonjob' => 'required|unique:nguonjob,ten_nguonjob,'
         ],
 
         [
@@ -72,17 +48,49 @@ class PositionController extends Controller
         ],
 
         [
-            'ma_chuc_danh' => 'Mã chức danh',
-            'ten_chuc_danh' => 'Tên chức danh'
+            'ten_nguonjob' => 'Tên nguồn job',
         ]);
-        
         $input = $request->all();
-        $position->update($input);
+        $source = Nguonjob::create($input);
         $notification = array(
-            'message' => 'Cập nhật Chức danh thành công', 
+            'message' => 'Tạo nguồn job thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('sources-job.index')
+                        ->with($notification);
+    }
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $source = Nguonjob::findOrFail($request->id_source);
+        $this->validate($request, [
+            'ten_nguonjob' => 'required|unique:nguonjob,ten_nguonjob,'.$request->id_source,
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'unique' => ':attribute đã tồn tại!'
+        ],
+
+        [
+            'ten_nguonjob' => 'Tên nguồn job',
+        ]);
+        $input = $request->all();
+        $source->update($input);
+        $notification = array(
+            'message' => 'Cập nhật nguồn job thành công', 
             'alert-type' => 'info'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('sources-job.index')
                         ->with($notification);
     }
 
@@ -94,13 +102,13 @@ class PositionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $position = Chucdanh::findOrFail($request->id_position);
-        $position->delete();
+        $source = Nguonjob::findOrFail($request->id_source);
+        $source->delete();
         $notification = array(
-            'message' => 'Xóa Chức danh thành công', 
+            'message' => 'Xóa nguồn job thành công', 
             'alert-type' => 'warning'
             );
-        return redirect()->route('positions.index')
+        return redirect()->route('sources-job.index')
                         ->with($notification);
     }
 }
