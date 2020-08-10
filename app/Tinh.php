@@ -9,6 +9,7 @@ class Tinh extends Model
     protected $table = 'tinh';
     public $timestamp = false;
     protected $fillable = [
+        'ma_tinh',
         'ten_tinh'
     ];
 

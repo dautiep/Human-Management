@@ -9,6 +9,7 @@ class Xa extends Model
     protected $table = 'xa';
     public $timestamp = false;
     protected $fillable = [
+        'ma_xa',
         'ten_xa',
         'id_huyen',
         'id_tinh'

@@ -15,6 +15,7 @@ class CreateTinh extends Migration
     {
         Schema::create('tinh', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ma_tinh', 255);
             $table->string('ten_tinh');
             $table->timestamps();
         });

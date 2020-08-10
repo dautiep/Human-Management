@@ -64,11 +64,11 @@ class Ungvien extends Model
 
     public function trangthaiphongvan()
     {
-        return $this->belongsTo('App\Trangthaiphongvan', 'id_trangthaiphongvan', 'id');
+        return $this->belongsTo('App\Trangthaiphongvan', 'id_trangthai_phongvan', 'id');
     }
 
     public function ketquaphongvan()
     {
-        return $this->belongsTo('App\Ketquaphongvan', 'id_ketquaphongvan', 'id');
+        return $this->belongsTo('App\Ketquaphongvan', 'id_ketqua_phongvan', 'id');
     }
 }

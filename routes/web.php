@@ -17,6 +17,11 @@ Route::prefix('tuyen-dung')->group(function(){
     Route::get('','HomeController@index')->name('recruitment');
     Route::get('{slug}/danh-sach-cong-viec', 'HomeController@showJobsInProject')->name('jobs');
     Route::get('{ma_job}/chi-tiet-cong-viec', 'HomeController@showDetailJob')->name('detail-job');
+    Route::get('{ma_job}/chi-tiet-cong-viec/ung-tuyen', 'HomeController@showViewApplyJob')->name('apply-job');
+    Route::post('{ma_job}/chi-tiet-cong-viec/ung-tuyen', 'HomeController@applyJob')->name('apply');
+    Route::post('showDistricts-in-provinces', 'HomeController@showDistrictsInProvince')->name('show-district');
+    Route::post('showCommunes-in-districts', 'HomeController@showCommunesInDistrict')->name('show-commune');
+
 });
 
 Auth::routes();
@@ -34,6 +39,15 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('sources-job', 'SourceJobController');
     Route::resource('interview-status', 'InterviewStatusController');
     Route::resource('interview-result', 'InterviewResultController');
+    Route::resource('provinces', 'ProvinceController');
+    Route::post('provinces/import-provinces', 'ProvinceController@importProvinces')->name('import-provinces');
+    Route::resource('districts', 'DistrictController');
+    Route::post('districts/import-districts', 'DistrictController@importDistricts')->name('import-districts');
+    Route::resource('communes', 'CommuneController');
+    Route::post('communes/import-communes', 'CommuneController@importCommunes')->name('import-communes');
+    Route::get('candidates/send-mail/{id}', 'CandidateController@confirmCandidates')->name('confirm');
+    Route::post('candidates/send-mail/{id}', 'CandidateController@sendMailInterview')->name('send-mail');
+    Route::resource('candidates', 'CandidateController');
 
     Route::prefix('ung-vien')->group(function(){
         Route::get('danh-sach-ung-vien', 'CandidateController@index');

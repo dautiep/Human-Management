@@ -9,6 +9,7 @@ class Huyen extends Model
     protected $table = 'huyen';
     public $timestamp = false;
     protected $fillable = [
+        'ma_huyen',
         'ten_huyen',
         'id_tinh'
     ];

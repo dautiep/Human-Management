@@ -15,7 +15,7 @@ class CreateUngvien extends Migration
     {
         Schema::create('ungvien', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ma_ungvien', 255);
+            $table->string('ma_ungvien', 255)->nullable();
             $table->string('ho_ten', 255);
             $table->tinyInteger('gioi_tinh');
             $table->date('ngay_sinh');

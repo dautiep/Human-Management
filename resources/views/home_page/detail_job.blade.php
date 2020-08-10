@@ -69,7 +69,7 @@
                         </ul>
                     </div>
                     <br>
-                    <a href="{{route('detail-job', $job->ma_job)}}" class="apply-btn">Ứng tuyển công việc này</a>
+                    <a href="{{route('apply-job', $job->ma_job)}}" class="apply-btn">Ứng tuyển công việc này</a>
                     
                 </div>
             </div>

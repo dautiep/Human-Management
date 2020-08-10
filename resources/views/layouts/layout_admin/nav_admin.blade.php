@@ -12,6 +12,9 @@
         <a href="{{route('jobs.index')}}" class="nav-link">CÔNG VIỆC</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('candidates.index')}}" class="nav-link">ỨNG VIÊN</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('recruitment')}}" class="nav-link">TUYỂN DỤNG</a>
       </li>
     </ul>

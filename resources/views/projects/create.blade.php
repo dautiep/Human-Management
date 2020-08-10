@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-body">
-                                <form action="{{route('projects.store')}}" method="post">
+                                <form action="{{route('send-mail')}}" method="post">
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-6">

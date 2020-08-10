@@ -8,12 +8,19 @@ use App\Detail_job;
 use App\User;
 use App\Slider;
 use App\Duan;
+use App\Http\Requests\AddCandidateRequest;
 use App\Job;   
 use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateProfileUserRequest;
-
+use Illuminate\Support\Carbon;
+use App\Huyen;
+use App\Nguonjob;
+use App\Tinh;
+use App\Trinhdovanhoa;
+use App\Ungvien;
+use App\Xa;
 
 class HomeController extends Controller
 {
@@ -58,6 +65,54 @@ class HomeController extends Controller
         $detail_job = Detail_job::where('id_job', $job->id)->first();
         return view('home_page.detail_job', ['sliders' => $sliders, 'job' => $job,
                                             'detail_job' => $detail_job]);
+    }
+
+    public function showViewApplyJob($ma_job)
+    {
+        $provices = Tinh::all();
+        $districts = Huyen::all();
+        $communes = Xa::all();
+        $sources = Nguonjob::all();
+        $levels = Trinhdovanhoa::all();
+        $sliders = Slider::all();
+        $job = Job::where('ma_job', 'LIKE', "{$ma_job}")->first();
+        $detail_job = Detail_job::where('id_job', $job->id)->first();
+        return view('home_page.apply_job', ['sliders' => $sliders, 'job' => $job,
+                                            'sources' => $sources, 'levels' => $levels,
+                                            'districts' => $districts, 'communes' => $communes,
+                                            'detail_job' => $detail_job, 'provinces' => $provices]);
+    }
+
+    public function showDistrictsInProvince(Request $request)
+    {
+        if ($request->ajax()) {
+            $districts = Huyen::where('id_tinh', $request->id_tinh)->select('id', 'ten_huyen')->get();
+            return response()->json($districts);
+        }
+    }
+
+    public function showCommunesInDistrict(Request $request)
+    {
+        if ($request->ajax()) {
+            $communes = Xa::where('id_huyen', $request->id_huyen)->select('id', 'ten_xa')->get();
+            return response()->json($communes);
+        }
+    }
+
+    public function applyJob(AddCandidateRequest $request, $ma_job)
+    {
+        $job = Job::where('ma_job', 'LIKE', "{$ma_job}")->first();
+        $validated = $request->validated();
+        $input = $request->all();
+        $date = Carbon::create($request->ngay_sinh);
+        $input['ngay_sinh'] = $date->toDateString();
+        $candidate = Ungvien::create($input);
+        $notification = array(
+            'message' => 'Ứng tuyển thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('detail-job', $job->ma_job)
+            ->with($notification);
     }
 
     public function userRegister(Request $request)

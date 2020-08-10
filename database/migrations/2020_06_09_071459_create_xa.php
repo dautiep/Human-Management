@@ -15,7 +15,8 @@ class CreateXa extends Migration
     {
         Schema::create('xa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ten_xa');
+            $table->string('ma_xa', 255);
+            $table->string('ten_xa', 255);
             
 
             //foreign key

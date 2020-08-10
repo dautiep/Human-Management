@@ -68,7 +68,7 @@
 										<td>
 											<a class = "btn btn-primary" href="{{route('users.show', $user->id)}}">Show</a>
 											<a class="btn btn-warning" data-userid={{$user->id}} data-username="{{$user->username}}"
-												data-email={{$user->email_address}} data-hoten="{{$user->hoten}}" 
+												data-email={{$user->email}} data-hoten="{{$user->hoten}}" 
 												data-gioi_tinh={{$user->gioi_tinh}}
 												data-danhso={{$user->danhso}} data-so_dien_thoai="{{$user->so_dien_thoai}}"
 												data-toggle="modal" data-target="#editUserModal">Edit</a>
@@ -122,7 +122,7 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label>Email: </label>
-								{!! Form::text('email_address', null, array('placeholder' => 'Email','class' => 'form-control', 'id' => 'user_email')) !!}
+								{!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'id' => 'user_email')) !!}
 							</div>
 						</div>
 						<div class="form-row">

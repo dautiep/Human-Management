@@ -15,6 +15,7 @@ class CreateHuyen extends Migration
     {
         Schema::create('huyen', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('ma_huyen', 255);
             $table->string('ten_huyen', 255);
            
 
