@@ -241,7 +241,7 @@
                             <br />
                             <br />
                             <br/>
-                            <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                            <button class="btn btn-success crop_image">Cắt và tải hình nền</button>
                          </div>
                     </div>
                 </div>
@@ -359,7 +359,6 @@
                     error: function (xhr, ajaxOptions, thrownError) {
                         alert(thrownError);
                     }
-                    
                 });
                 })
             });

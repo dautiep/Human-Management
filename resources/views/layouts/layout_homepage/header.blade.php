@@ -37,12 +37,12 @@
                   <li>
                     <a  class="page-scroll" href="#services"><b>Dự án</b></a>
                   </li>
-                  <li  class="dropdown"><a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Menu</b><span class="caret"></span></a>
+                  <!-- <li  class="dropdown"><a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Menu</b><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href=# >Drop Down 1</a></li>
                       <li><a href=# >Drop Down 2</a></li>
                     </ul> 
-                  </li>
+                  </li> -->
                   <li>
                     <a  class="page-scroll" href="#contact"><b>Liên hệ</b></a>
                   </li>
@@ -52,7 +52,7 @@
                   </li>
 
                   <li>
-                    <a  class="page-scroll" href="{{route('candidate-register')}}">Đăng ký</a>
+                    <!-- <a  class="page-scroll" href="{{route('candidate-register')}}">Đăng ký</a> -->
                   </li>
                 </ul>
               </div>

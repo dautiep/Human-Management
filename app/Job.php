@@ -49,4 +49,9 @@ class Job extends Model
     {
         return $this->hasMany('App\Detail_job', 'id_job', 'id');
     }
+
+    public function cv()
+    {
+        return $this->hasMany('App\Cv', 'id_job', 'id');
+    }
 }

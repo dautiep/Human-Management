@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\AddUserRequest;
+use App\Job;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -21,13 +22,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // function __construct()
-    // {
-    //      $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-    //      $this->middleware('permission:user-create', ['only' => ['create','store']]);
-    //      $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-    //      $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
 
     public function index(Request $request)
     {
@@ -126,8 +127,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $jobs = Job::all();
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'jobs'));
 
     }
 

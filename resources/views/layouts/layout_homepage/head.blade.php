@@ -30,4 +30,7 @@
 
   <!-- Responsive Stylesheet File -->
   <link href="{{URL::asset('public/css/home_page/responsive.css')}}" rel="stylesheet">
+
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 </head>

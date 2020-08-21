@@ -24,6 +24,7 @@ class AddCandidateRequest extends FormRequest
     public function rules()
     {
         return [
+            'ma_ungvien' => 'required',
             'ho_ten' => 'required',     
             'gioi_tinh' => 'required',
             'ngay_sinh' => 'required',
@@ -45,6 +46,7 @@ class AddCandidateRequest extends FormRequest
     public function messages()
     {
         return [
+            'ma_ungvien.required' => 'Vui lòng nhập mã ứng viên',
             'ho_ten.required' => 'Vui lòng nhập họ tên',
             'gioi_tinh.required' => 'Vui lòng chọn giới tính!',
             'ngay_sinh.required' => 'Vui lòng nhập ngày sinh!',

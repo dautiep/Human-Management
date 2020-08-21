@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\About;
+use App\Cv;
 use App\Detail_job;
 use App\User;
 use App\Slider;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateProfileUserRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use App\Huyen;
 use App\Nguonjob;
@@ -21,6 +23,7 @@ use App\Tinh;
 use App\Trinhdovanhoa;
 use App\Ungvien;
 use App\Xa;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -115,6 +118,56 @@ class HomeController extends Controller
             ->with($notification);
     }
 
+    public function uploadCV(Request $request, $ma_job)
+    {
+        $job = Job::where('id', $ma_job)->first();
+        $validation = Validator::make($request->all(), [
+            'ho_ten' => 'required',
+            'email' => 'required|email',
+            'so_dien_thoai' => 'required',
+            'select_file' => 'required|mimetypes:application/pdf',
+        ],
+
+        [
+            'required' => ':attribute không được bỏ trống!',
+            'mimetypes' => ':attribute phải là file pdf',
+            'email' => ':attribute không hợp lệ'
+        ],
+
+        [
+            'select_file' => 'Hồ sơ tải lên',
+            'ho_ten' => 'Họ tên',
+            'so_dien_thoai' => 'Số điện thoại',
+            'email' => 'Địa chỉ mail'
+            
+        ]);
+        if($validation->passes())
+        {
+            $cv = $request->file('select_file');
+            $new_name = $this->bo_dau_vn($request->ho_ten).'.'.$cv->getClientOriginalExtension();
+            $path = public_path('upload/cv/'.$job->ma_job);
+            if(!Storage::exists($path))
+            {
+                Storage::makeDirectory($path, 0777, true, true);
+                $cv->move('upload/cv/'.$job->ma_job,$new_name);
+                $input = $request->all();
+                $input['ten_cv'] = $new_name;
+                $cv = Cv::create($input);
+            
+                return response()->json(['message'=> 'Ứng tuyển thành công']);
+            }
+            else
+            {
+                $cv->move('upload/cv/'.$job->ma_job,$new_name);
+                return response()->json(['message'=> 'Tải hồ sơ lên thành công']);
+            }
+        }
+        else
+        {
+            return response()->json(['error' => $validation->errors()->first()]);
+        }
+    }
+
     public function userRegister(Request $request)
     {
 
@@ -193,5 +246,48 @@ class HomeController extends Controller
    
         return redirect()->route('profile')
                         ->with($notification);
+    }
+
+    public function bo_dau_vn($str)
+    {
+
+        $unicode = array(
+
+            'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
+
+            'd' => 'đ',
+
+            'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+
+            'i' => 'í|ì|ỉ|ĩ|ị',
+
+            'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+
+            'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+
+            'y' => 'ý|ỳ|ỷ|ỹ|ỵ',
+
+            'A' => 'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+
+            'D' => 'Đ',
+
+            'E' => 'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+
+            'I' => 'Í|Ì|Ỉ|Ĩ|Ị',
+
+            'O' => 'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+
+            'U' => 'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+
+            'Y' => 'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+
+        );
+
+        foreach ($unicode as $nonUnicode => $uni) {
+            $str = preg_replace("/($uni)/i", $nonUnicode, $str);
+        }
+        $str = str_replace(' ', '_', $str);
+        $str = strtolower($str);
+        return $str;
     }
 }

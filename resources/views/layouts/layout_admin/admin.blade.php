@@ -6,8 +6,10 @@
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
             @include('layouts.layout_admin.nav_admin')
-
+            
+            @can('user-list')
             @include('layouts.layout_admin.slidebar_admin')
+            @endcan
 
             <!-- Content Wrapper. Contains page content -->
             

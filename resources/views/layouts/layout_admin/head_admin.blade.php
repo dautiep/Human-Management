@@ -25,5 +25,6 @@
   <link rel="stylesheet" href="{{URL::asset('public/lib/toastr/css/toastr.min.css')}}">
   <!-- DataPicker -->
   <link href="{{URL::asset('public/lib/datapicker/css/bootstrap-datepicker.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="{{URL::asset('public/css/custom_nav.css')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

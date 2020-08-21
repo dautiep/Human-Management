@@ -21,6 +21,7 @@ Route::prefix('tuyen-dung')->group(function(){
     Route::post('{ma_job}/chi-tiet-cong-viec/ung-tuyen', 'HomeController@applyJob')->name('apply');
     Route::post('showDistricts-in-provinces', 'HomeController@showDistrictsInProvince')->name('show-district');
     Route::post('showCommunes-in-districts', 'HomeController@showCommunesInDistrict')->name('show-commune');
+    Route::post('{ma_job}/uploadCV', 'HomeController@uploadCV')->name('uploadcv');
 
 });
 
@@ -45,9 +46,15 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('districts/import-districts', 'DistrictController@importDistricts')->name('import-districts');
     Route::resource('communes', 'CommuneController');
     Route::post('communes/import-communes', 'CommuneController@importCommunes')->name('import-communes');
+    Route::get('candidates/apply', 'CandidateController@showListCandidateApply')->name('applied');
+    Route::get('candidates/send-mail-result/{id}', 'CandidateController@sendMailSuccess')->name('send-mail-result');
+    Route::get('candidates/send-mail-result-fail/{id}', 'CandidateController@sendMailFail')->name('send-mail-result-fail');
     Route::get('candidates/send-mail/{id}', 'CandidateController@confirmCandidates')->name('confirm');
     Route::post('candidates/send-mail/{id}', 'CandidateController@sendMailInterview')->name('send-mail');
     Route::resource('candidates', 'CandidateController');
+    Route::get('cv/{id}/detail', 'CvController@showDetail')->name('detail-cv');
+    Route::get('cv/{ma_job}', 'CvController@showList')->name('list-cv');
+    Route::resource('cv', 'CvController');
 
     Route::prefix('ung-vien')->group(function(){
         Route::get('danh-sach-ung-vien', 'CandidateController@index');

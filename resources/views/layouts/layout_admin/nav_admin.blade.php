@@ -5,19 +5,62 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      @can('project-list')
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('projects.index')}}" class="nav-link">DỰ ÁN</a>
       </li>
+      @endcan
+      @can('job-list')
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('jobs.index')}}" class="nav-link">CÔNG VIỆC</a>
       </li>
+      @endcan
+      <!-- <li class="nav-item d-none d-sm-inline-block">
+        <div class="dropdown">
+          <button class="dropbtn">ỨNG VIÊN</button>
+          <div class="dropdown-content">
+            <a href="{{route('candidates.index')}}">Danh sách ứng viên</a>
+            <a href="{{route('applied')}}">Danh sách ứng viên đã ứng tuyển</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+      </li> -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('candidates.index')}}" class="nav-link">ỨNG VIÊN</a>
+        <ul class="dropdown">
+          <button class="dropbtn">ỨNG VIÊN</button>
+          <div class="dropdown-content">
+            <li class="dropdown-submenu">
+              <a class="test" href="{{route('candidates.index')}}">Danh sách ứng viên<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="test"><a tabindex="-1" href="{{route('applied')}}">Danh sách ứng viên đã ứng tuyển</a></li>
+                <!-- <li class="test"><a tabindex="-1" href="">aaa</a></li> -->
+                <!-- <li class="dropdown-submenu">
+                  <a class="test" href="#">Another dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">3rd level dropdown</a></li>
+                    <li><a href="#">3rd level dropdown</a></li>
+                  </ul>
+                </li> -->
+              </ul>
+            </li>
+            <li class="test"><a tabindex="-1" href="{{route('cv.index')}}">Danh sách cv</a></li>
+            <!-- <li class="test"><a tabindex="-1" href="#">CSS</a></li> -->
+          </div>
+        </ul> 
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('recruitment')}}" class="nav-link">TUYỂN DỤNG</a>
       </li>
     </ul>
+
+    <!-- <div class="dropdown">
+      <button class="dropbtn">Dropdown</button>
+      <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

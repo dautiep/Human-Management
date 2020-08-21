@@ -70,6 +70,9 @@
                     </div>
                     <br>
                     <a href="{{route('apply-job', $job->ma_job)}}" class="apply-btn">Ứng tuyển công việc này</a>
+                    <button class="apply-btn" style="margin-left: 42px;" data-majob="{{$detail_job->id_job}}" data-toggle="modal" data-target="#UploadCVModal">
+                        Tải hồ sơ
+                    </button>
                     
                 </div>
             </div>
@@ -78,6 +81,50 @@
         </div>
     </div>
     <!-- End About area -->
+
+    <!-- Modal upload -->
+	<div class="modal modal-danger fade" id="UploadCVModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+			<h4 class="modal-title text-left" id="myModalLabel">Tải hồ sơ</h4>
+			</div>
+            <form method="POST" id="upload_form" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="modal-body">
+                        <p class="text-center">
+                            Tải hồ sơ lên từ trên máy bạn
+                        </p>
+                        
+                            <div class="form-group col-md-6">
+                                <label>Họ tên của bạn</label>
+                                <input type="text" name="ho_ten" placeholder="Nhập họ tên của bạn">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Email của bạn</label>
+                                <input type="text" name="email" placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Số điện thoại</label>
+                                <input type="text" name="so_dien_thoai" placeholder="Nhập số điện thoại của bạn">
+                            </div>
+                            
+                            
+                        <input type="file" id="select_file" name="select_file" value="">
+                        <input type= "hidden" id="majob" name="id_job" value="">
+        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
+                        <button type="submit" id="upload" name="upload" class="btn btn-primary">Tải lên</button>
+                    </div>
+                </div>
+            </form>
+		</div>
+		</div>
+	</div>
+    <!-- End Modal upload-->
     @section('script')
     @parent
     <!-- toastr -->
@@ -118,6 +165,54 @@
             }
         @endif
     </script>
+
+    <!-- errors -->
+    <script>
+        $('#UploadCVModal').on('show.bs.modal', function(event){
+			var button = $(event.relatedTarget)
+			var job_ma = button.data('majob')
+			var modal = $(this);
+			modal.find('.modal-body #majob').val(job_ma);
+		});
+
+        $('#upload_form').on('submit', function(event)
+        {
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $.ajax({
+                url: "{{route('uploadcv', $detail_job->id_job)}}",
+                method: 'post',
+                data: new FormData(this),
+                dataType: 'JSON',
+                contentType: false,
+                cache: false,
+                processData: false,
+                success:function(data)
+                {
+                    if(data.message)
+                    {
+                        toastr.success(data.message);
+                    }
+                    else
+                    {
+                        toastr.error(data.error);
+                    }
+                    $('#UploadCVModal').modal('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    
+                    alert(thrownError);
+                }
+            })
+        })
+    </script>
+
+
     @endsection
 @endsection
 

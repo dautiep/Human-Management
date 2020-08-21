@@ -46,6 +46,16 @@
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong style="color: red;">{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong style="color: red;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                            
                             <div class="form-group form-button">
                                 <button type="submit" class="btn-register">

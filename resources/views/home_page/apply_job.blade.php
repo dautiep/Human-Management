@@ -200,16 +200,19 @@
                             </div>
                             <br>
                             <div class="form-row">
-                                <div class="text-left" ><button style="margin-top: 42px;" type="submit">Ứng tuyển ngay</button></div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <div class="text-left" ><button style="margin-top: 42px;" type="submit">Ứng tuyển ngay</button></div>
+                                </div>
                             </div>
                         </form>
-                    </div>
+                    </div>  
                 </div>
                 <!-- End Left contact -->
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- End Contact Area -->
     @section('script')
     @parent
@@ -323,6 +326,7 @@
                 }
             });
         });
+
     </script>
     @endsection
 @endsection

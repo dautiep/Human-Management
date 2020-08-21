@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Chucdanh;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddCandidateRequest;
 use Illuminate\Support\Carbon;
 use App\Huyen;
 use App\Job;
 use App\Ketquaphongvan;
 use App\Mail\SendMailInterview;
+use App\Mail\SendMailSuccess;
+use App\Mail\SendMailFail;
 use App\Nguonjob;
 use App\Tinh;
 use App\Trangthaiphongvan;
@@ -32,6 +35,13 @@ class CandidateController extends Controller
         ->with('i');
     }
 
+    public function showListCandidateApply()
+    {
+        $candidates = Ungvien::where('id_trangthai_phongvan', 1)->get();
+        return view('candidates.apply', compact('candidates'))
+        ->with('i');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +49,20 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        
+        $positions = Chucdanh::all();
+        $jobs = Job::all();
+        $levels = Trinhdovanhoa::all();
+        $results = Ketquaphongvan::all();
+        $states = Trangthaiphongvan::all();
+        $sources = Nguonjob::all();
+        $provinces = Tinh::all();
+        $districts = Huyen::all();
+        $communes = Xa::all();
+        return view('candidates.create', ['results' => $results, 'states' => $states,
+                                        'sources' => $sources, 'levels' => $levels,
+                                        'jobs' => $jobs, 'positions' => $positions,
+                                        'provinces' => $provinces, 'districts' => $districts,
+                                        'communes' => $communes]);
     }
 
     /**
@@ -48,15 +71,34 @@ class CandidateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddCandidateRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $input = $request->all();
+        $date = Carbon::create($request->ngay_sinh);
+        $input['ngay_sinh'] = $date->toDateString();
+        $candidate = Ungvien::create($input);
+        $notification = array(
+            'message' => 'Tạo ứng viên thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('candidates.index')
+                                    ->with($notification);
+
     }
 
     
     public function confirmCandidates($id)
     {
         $candidate = Ungvien::where('id', $id)->first();
+        if($candidate->id_trangthai_phongvan == 5)
+        {
+            $notification = array(
+                'message' => 'Ứng viên này đã gửi mail phỏng vấn!',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('candidates.index')->with($notification);
+        }
         return view('candidates.confirm', ['candidate' => $candidate]);
     }
 
@@ -76,6 +118,64 @@ class CandidateController extends Controller
         $candidate->update($input);
         $notification = array(
             'message' => 'Gửi mail thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('candidates.index')->with($notification);
+        
+    }
+
+    public function sendMailSuccess($id)
+    {
+        $candidate = Ungvien::where('id', $id)->first();
+        if($candidate->id_ketqua_phongvan == 1 ||  $candidate->id_ketqua_phongvan == 2)
+        {
+            $notification = array(
+                'message' => 'Ứng viên này đã gửi mail kết quả!',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('candidates.index')->with($notification);
+        }
+        $data = array();
+        $data[] = [
+            'ho_ten' => $candidate->ho_ten,
+            'cong_viec' => $candidate->job->ten_job,
+            'vi_tri' => $candidate->chucdanh->ten_chuc_danh,
+        
+        ];
+        
+        Mail::to($candidate->email)->send(new SendMailSuccess($data));
+        $input['id_ketqua_phongvan'] = 1;
+        $candidate->update($input);
+        $notification = array(
+            'message' => 'Gửi mail kết quả thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('candidates.index')->with($notification);
+    }
+
+    public function sendMailFail($id)
+    {
+        $candidate = Ungvien::where('id', $id)->first();
+        if($candidate->id_ketqua_phongvan == 1 ||  $candidate->id_ketqua_phongvan == 2)
+        {
+            $notification = array(
+                'message' => 'Ứng viên này đã gửi mail kết quả!',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('candidates.index')->with($notification);
+        }
+        $data = array();
+        $data[] = [
+            'ho_ten' => $candidate->ho_ten,
+            'cong_viec' => $candidate->job->ten_job,
+            'vi_tri' => $candidate->chucdanh->ten_chuc_danh,
+        ];
+        
+        Mail::to($candidate->email)->send(new SendMailFail($data));
+        $input['id_ketqua_phongvan'] = 2;
+        $candidate->update($input);
+        $notification = array(
+            'message' => 'Gửi mail kết quả thành công',
             'alert-type' => 'success'
         );
         return redirect()->route('candidates.index')->with($notification);
@@ -171,8 +271,15 @@ class CandidateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $candidate = Ungvien::where('id', $request->ma_candidate)->first();
+        $candidate->delete();
+        $notification = array(
+            'message' => 'Xóa thông tin ứng viên thành công',
+            'alert-type' => 'warning'
+        );
+        return redirect()->route('candidates.index')
+            ->with($notification);
     }
 }
