@@ -54,7 +54,7 @@ class Ungvien extends Model
 
     public function chucdanh()
     {
-        return $this->belongsTo('App\ChucDanh', 'id_chucdanh', 'id');
+        return $this->belongsTo('App\Chucdanh', 'id_chucdanh', 'id');
     }
 
     public function trinhdovanhoa()
