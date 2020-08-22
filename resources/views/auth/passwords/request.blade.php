@@ -34,8 +34,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <p class="login-box-msg">Bạn quên mật khẩu? Hãy nhập email của mình để khôi phục.</p>
-
+        <p class="login-box-msg">Bạn quên mật khẩu? Hãy nhập email của mình để khôi phục nhé.</p>
         <form action="{{ route('password.email') }}" method="post">
             @csrf
             <div class="input-group mb-3">
