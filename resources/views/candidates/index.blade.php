@@ -87,7 +87,6 @@
 											data-toggle="modal" data-target="#deleteCandidateModal">Xóa
 										</button>
 										<a class="btn btn-info" href="{{route('confirm', $candidate->id)}}">Gửi mail phỏng vấn</a>
-										<!-- <a class="btn btn-info" href="{{route('send-mail-result', $candidate->id)}}">Gửi mail kết quả</a> -->
 										<span class="dropdown">
 										<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Gửi mail kết quả

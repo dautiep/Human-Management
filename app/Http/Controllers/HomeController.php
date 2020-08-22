@@ -109,6 +109,7 @@ class HomeController extends Controller
         $input = $request->all();
         $date = Carbon::create($request->ngay_sinh);
         $input['ngay_sinh'] = $date->toDateString();
+        dd($input);
         $candidate = Ungvien::create($input);
         $notification = array(
             'message' => 'Ứng tuyển thành công',
