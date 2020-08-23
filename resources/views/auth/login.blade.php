@@ -22,7 +22,7 @@
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="public/images/signin-image.jpg" alt="sing in image"></figure>
-                        <a href="{{ route('candidate-register') }}" class="signin-image-link">Bạn chưa có tài khoản người dùng Mail Driver: {{ env('MAIL_MAILER') }}</a>
+                        <a href="{{ route('candidate-register') }}" class="signin-image-link">Bạn chưa có tài khoản người dùng</a>
                     </div>
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
