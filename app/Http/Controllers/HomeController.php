@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\About;
+use App\Chucdanh;
 use App\Cv;
 use App\Detail_job;
 use App\User;
 use App\Slider;
 use App\Duan;
 use App\Http\Requests\AddCandidateRequest;
+use App\Http\Requests\ApplyJobRequest;
 use App\Job;   
 use Illuminate\Support\Facades\Auth; //important
 use App\Rules\MatchOldPassword;
@@ -102,20 +104,20 @@ class HomeController extends Controller
         }
     }
 
-    public function applyJob(AddCandidateRequest $request, $ma_job)
+    
+
+    public function applyJob(ApplyJobRequest $request, $ma_job)
     {
         $job = Job::where('ma_job', 'LIKE', "{$ma_job}")->first();
-        $validated = $request->validated();
         $input = $request->all();
         $date = Carbon::create($request->ngay_sinh);
         $input['ngay_sinh'] = $date->toDateString();
-        dd($input);
         $candidate = Ungvien::create($input);
         $notification = array(
             'message' => 'Ứng tuyển thành công',
             'alert-type' => 'success'
         );
-        return redirect()->route('detail-job', $job->ma_job)
+        return redirect()->route('detail-job', $ma_job)
             ->with($notification);
     }
 

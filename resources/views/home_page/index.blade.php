@@ -35,7 +35,7 @@
                                     <a class="services-icon" href="{{route('jobs', $project->slug)}}">
                                         <i class="{{$project->hinh_duan}}"></i>
                                     </a>
-                                    <h4>{{$project->ten_du_an}}</h4>
+                                    <h4><a href="{{route('jobs', $project->slug)}}">{{$project->ten_du_an}}</a></h4>
                                     <p><?php echo $project->mota_duan; ?></p>
                                 </div>
                             </div>

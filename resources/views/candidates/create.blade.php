@@ -234,10 +234,7 @@
                                                     <div class="form-group">
                                                         <label for="inputStatus">Trạng thái phỏng vấn</label>
                                                         <select class="form-control custom-select" name="id_trangthai_phongvan">
-                                                            <option value="" selected disabled>-Chọn trạng thái-</option>
-                                                            @foreach($states as $status)
-                                                                <option value="{{$status->id}}">{{$status->ten_trangthai_phongvan}}</option>
-                                                            @endforeach
+                                                            <option default value="1">{{$states[0]->ten_trangthai_phongvan}}</option>
                                                         </select>
                                                         @error('id_trangthai_phongvan')
                                                             <p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
@@ -248,10 +245,7 @@
                                                     <div class="form-group">
                                                         <label for="inputStatus">Kết quả phỏng vấn</label>
                                                         <select class="form-control custom-select" name="id_ketqua_phongvan">
-                                                            <option value="" selected disabled>-Chọn kết quả-</option>
-                                                            @foreach($results as $result)
-                                                                <option value="{{$result->id}}">{{$result->ten_ketqua_phongvan}}</option>
-                                                            @endforeach
+                                                            <option value="4">{{$results[2]->ten_ketqua_phongvan}}</option>
                                                         </select>
                                                         @error('id_ketqua_phongvan')
                                                             <p class="alert-err" style="color: red;"><i><b>{{$message}}</b></i></p>
@@ -359,6 +353,7 @@
                     },
                     success: function(data) {
                         $("select[name='id_huyen'").html('');
+                        $('#id_huyen').append('<option value="" selected="selected">-Chọn huyện-</option>');
                         $.each(data, function(key, value){
                             $("select[name='id_huyen']").append(
                                 "<option value=" + value.id + ">" + value.ten_huyen + "</option>"

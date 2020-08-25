@@ -8,12 +8,12 @@
     <title>BellSystem24Hoasao</title>
 @endsection
 @section('content')
-    @include('layouts.layout_homepage.header')
+    @include('layouts.layout_homepage.header_detail_job')
 
     @include('layouts.layout_homepage.slider')
 
     <!-- Start About area -->
-    <div id="about" class="about-area area-padding">
+    <div id="detail" class="services-area area-padding">
         <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">

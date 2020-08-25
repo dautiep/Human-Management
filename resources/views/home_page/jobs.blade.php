@@ -8,12 +8,12 @@
     <title>BellSystem24Hoasao</title>
 @endsection
 @section('content')
-    @include('layouts.layout_homepage.header')
+    @include('layouts.layout_homepage.header_job')
 
     @include('layouts.layout_homepage.slider')
 
     <!-- Start Blog Area -->
-    <div id="blog" class="blog-area">
+    <div id="list" class="blog-area">
         <div class="blog-inner area-padding">
             <div class="blog-overly"></div>
             <div class="container ">
