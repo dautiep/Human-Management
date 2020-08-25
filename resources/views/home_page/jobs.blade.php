@@ -41,7 +41,7 @@
                             </div>
                             <div class="blog-text">
                                 <h4>
-                                    <a href="blog.html">{{$job->ten_job}}</a>
+                                    <a href="{{route('detail-job', $job->ma_job)}}">{{$job->ten_job}}</a>
                                 </h4>
                                 <p>{{$job->mo_ta_job}}</p>
                             </div>
