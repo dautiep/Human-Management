@@ -89,7 +89,7 @@
 										<a class="btn btn-info" href="{{route('confirm', $candidate->id)}}">Gửi mail phỏng vấn</a>
 										<span class="dropdown">
 										<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											Gửi mail kết quả
+											Gửi mail kết quả phỏng vấn
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											<a class="dropdown-item" href="{{route('send-mail-result', $candidate->id)}}">Mail trúng tuyển</a>
