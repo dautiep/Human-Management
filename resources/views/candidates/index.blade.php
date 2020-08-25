@@ -10,7 +10,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-8">
-						<h1>Bảng ứng viên</h1>
+						<h1>Bảng Ứng viên</h1>
 					</div>
 					<div class="col-sm-2">
 						<a class="btn btn-success" href="{{route('candidates.create')}}"> Thêm ứng viên</a>
