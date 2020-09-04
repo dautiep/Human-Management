@@ -52,7 +52,7 @@
 								<th style="width: 150px;">Trình độ văn hóa</th>
                                 <th style="width: 150px;">Trạng thái phỏng vấn</th>
                                 <th style="width: 150px;">Kết quả phỏng vấn</th>
-								<th style="width: 200px;">Thao tác</th>
+								<th style="width: 500px;">Thao tác</th>
                                 
 							</tr>
 						</thead>
@@ -74,20 +74,27 @@
                                         <td>{{$candidate->trinhdovanhoa->ten_trinhdovanhoa}}</td>
                                         <td>
                                             {{$candidate->trangthaiphongvan->ten_trangthai_phongvan}}
-                                            <a class = "btn btn-primary" href="#">Cập nhật</a>
                                         </td>
                                         <td>
                                             {{$candidate->ketquaphongvan->ten_ketqua_phongvan}}
-                                            <a class = "btn btn-primary" href="#">Cập nhật</a>
                                         </td>
 										
 										<td>
-											<a class="btn btn-warning" href="{{route('candidates.edit', $candidate->id)}}" >Sửa</a>
-											<button class="btn btn-danger" data-candidatema="{{$candidate->id}}" 
-												data-toggle="modal" data-target="#deleteCandidateModal">Xóa
-											</button>
-											<a class="btn btn-info" href="{{route('confirm', $candidate->id)}}">Gửi mail</a>
-										</td>
+										<a class="btn btn-warning" href="{{route('candidates.edit', $candidate->id)}}" >Sửa</a>
+										<button class="btn btn-danger" data-candidatema="{{$candidate->id}}" 
+											data-toggle="modal" data-target="#deleteCandidateModal">Xóa
+										</button>
+										<a class="btn btn-info" href="{{route('confirm', $candidate->id)}}">Gửi mail phỏng vấn</a>
+										<span class="dropdown">
+										<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Gửi mail kết quả phỏng vấn
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="{{route('send-mail-result', $candidate->id)}}">Mail trúng tuyển</a>
+											<a class="dropdown-item" href="{{route('send-mail-result-fail', $candidate->id)}}">Mail trượt</a>
+										</div>
+										</span>
+									</td>	
 									</tr>
 								@endforeach
 						</tbody>
